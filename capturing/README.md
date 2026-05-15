@@ -6,7 +6,6 @@ tested with Python 3.10.12
 
 ## TODO
 
-- read camera/mic association from config-file
 - control start/stop (and file names?) from OSC interface
 - write metadata to CSV
 - log exact start time of each stream recording

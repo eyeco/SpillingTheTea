@@ -6,13 +6,13 @@ import ffmpeg
 import time
 import subprocess
 
-
 class AudioDevice:
-    
+
+    ext = ".aac"
     captureDir = 'L:\\stt\\audio'
 
     def __init__(self, id, name, url):
-        #self.id = id
+        self.id = id
         self.name = name
         self.url = url
 
@@ -44,7 +44,10 @@ class AudioDevice:
 
         print(f"starting capturing {self.name} ({self.url})")
         timestr = time.strftime("%Y-%m-%d %H-%M-%S", time.localtime())
-        filename = f"{name}-{timestr}.aac"
+        if len(name) > 0:
+            filename = f"{self.id}--{name}--{timestr}{self.ext}"
+        else:
+            filename = f"{self.id}--{timestr}{self.ext}"
 
         if ffmpeg.captureAudio(self, filename):
             self.isRecording = True

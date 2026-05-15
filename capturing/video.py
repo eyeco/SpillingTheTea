@@ -9,10 +9,11 @@ import subprocess
 
 class VideoDevice:
 
+    ext = ".mp4"
     captureDir = 'L:\\stt\\video'
 
     def __init__(self, id, name, url):
-        #self.id = id
+        self.id = id
         self.name = name    # friendly name (not unique)
         self.url = url      # NOTE: this is a unique identifier, however it also includes the USB port, so when you re-plug to different USB ports, the ids change!
 
@@ -39,14 +40,17 @@ class VideoDevice:
         if self.logFile:
             self.logFile.close()
 
-    def startCapture(self, name):
+    def startCapture(self, name=""):
         if self.isRecording:
             self.stopCapture()
 
         print(f"starting capturing {self.name} ({self.url})")
 
         timestr = time.strftime("%Y-%m-%d %H-%M-%S", time.localtime())
-        filename = f"{name}-{timestr}.mp4"
+        if len(name) > 0:
+            filename = f"{self.id}--{name}--{timestr}{self.ext}"
+        else:
+            filename = f"{self.id}--{timestr}{self.ext}"
 
         if ffmpeg.captureVideo(self, filename, True):
             self.isRecording = True
