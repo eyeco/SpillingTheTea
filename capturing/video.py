@@ -83,7 +83,7 @@ class VideoDevice:
         self.isRecording = False
 
     def checkMJPEG(self):
-        lines = ffmpeg.options(self)
+        lines = ffmpeg.videoOptions(self)
         print(f"checking for MJPEG support ({self.url})")
         for l in lines:
             l = l.lstrip()
