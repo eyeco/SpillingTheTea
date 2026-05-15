@@ -10,7 +10,6 @@ import subprocess
 class VideoDevice:
 
     ext = ".mp4"
-    captureDir = 'L:\\stt\\video'
 
     def __init__(self, id, name, url):
         self.id = id
@@ -23,9 +22,13 @@ class VideoDevice:
         self.process = None
         self.logFile = None
 
+
     def __str__(self):
         #return f"video #{self.id}: {self.name} ({self.url})"
         return f"video: {self.name} ({self.url})"
+    
+    def desc(self):
+        return f"V:{self.id}"
 
     def cleanup(self):
         
@@ -54,6 +57,7 @@ class VideoDevice:
 
         if ffmpeg.captureVideo(self, filename, True):
             self.isRecording = True
+            utils.log(self, f"start ({filename})")
         else:
             utils.error(f"starting to capture failed {self.name}")
 
@@ -64,6 +68,7 @@ class VideoDevice:
             return
             
         print(f"stopping capturing {self.name} ({self.url})")
+        utils.log(self, "stop")
 
         if self.process == None:
             utils.warn(f"capturing process not available")

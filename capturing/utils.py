@@ -1,12 +1,20 @@
 # utils.py
 
 import os
+import csv
+import time
+
+from datetime import datetime
 
 # ANSI escape codes for color formatting on console
 RED = "\033[31m"
 YELLOW = "\033[33m"
 BLUE = "\033[34m"
 RESET = "\033[0m"
+
+outdir = "L:\\stt"
+audioCaptureDir = f'{outdir}\\audio'
+videoCaptureDir = f'{outdir}\\video'
 
 def error(str):
     print(f"{RED}ERROR: {str}{RESET}")
@@ -25,7 +33,6 @@ def extract(str,start,stop):
         return
     return str[pos0 + 1 : pos1]
 
-
 def checkOrCreate(path):
     if os.path.exists(path) == False:
         print(f"trying to cerate output directory {path}")
@@ -39,3 +46,37 @@ def checkOrCreate(path):
         return False
     
     return True
+
+class Logger:
+
+    columns = ["timestamp","datetime","device","event"]
+
+    def __init__(self, filename="event-log.csv"):
+
+        path = f"{outdir}\\{filename}"
+
+        exists = os.path.exists(path) and os.path.getsize(path) > 0
+
+        self.file = open(path, "a", newline="", encoding="utf-8")
+        self.writer = csv.writer(self.file)
+        if not exists:
+            # self.writer.writeheader()
+            self.writer.writerow(self.columns)
+
+    def write(self, ts, desc, msg):
+        dt = datetime.fromtimestamp(ts).strftime('%Y-%m-%d %H:%M:%S.%f')[:-3]
+        self.writer.writerow([ts,dt,desc,msg])
+        self.file.flush()
+
+    def close(self):
+        if self.file:
+            print("closing CSV file")
+            self.file.close()
+
+logger = Logger()
+
+def log(device,event):
+    if event.find(',') != -1:
+        warn(f"string {event} contains comma - replacing by _ for CSV")
+        event = event.replace(',','_')
+    logger.write(time.time(), device.desc(), event)

@@ -51,11 +51,14 @@ def videoOptions(url):
     return lines
 
 def captureAudio(device, filename):
-    pathAud = os.path.join(utils.captureDirAudio, filename)
+
+    utils.checkOrCreate(utils.audioCaptureDir)
+
+    pathAud = os.path.join(utils.audioCaptureDir, filename)
     pathLog = os.path.splitext(pathAud)[0] + ".log"
 
     if os.path.exists(pathAud):
-        utils.error(f"file {filename} already exists in {utils.captureDirAudio} - will not overwrite")
+        utils.error(f"file {filename} already exists in {utils.audioCaptureDir} - will not overwrite")
         return False
     
     print(f"starting to record file {pathAud}")
@@ -94,11 +97,14 @@ def captureAudio(device, filename):
     return True
 
 def captureVideo(device, filename, tryMJPEG):
-    pathVid = os.path.join(utils.captureDirVideo, filename)
+
+    utils.checkOrCreate(utils.videoCaptureDir)
+
+    pathVid = os.path.join(utils.videoCaptureDir, filename)
     pathLog = os.path.splitext(pathVid)[0] + ".log"
 
     if os.path.exists(pathVid):
-        utils.error(f"file {filename} already exists in {utils.captureDirVideo} - will not overwrite")
+        utils.error(f"file {filename} already exists in {utils.videoCaptureDir} - will not overwrite")
         return False
 
     print(f"starting to record file {pathVid}")

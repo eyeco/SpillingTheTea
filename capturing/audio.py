@@ -9,7 +9,6 @@ import subprocess
 class AudioDevice:
 
     ext = ".aac"
-    captureDir = 'L:\\stt\\audio'
 
     def __init__(self, id, name, url):
         self.id = id
@@ -25,6 +24,9 @@ class AudioDevice:
         #return f"audio #{self.id}: {self.name} ({self.url})"
         return f"audio: {self.name} ({self.url})"
     
+    def desc(self):
+        return f"A:{self.id}"
+
     def cleanup(self):
         
         self.stopCapture()
@@ -38,7 +40,7 @@ class AudioDevice:
         if self.logFile:
             self.logFile.close()
 
-    def startCapture(self, name):
+    def startCapture(self, name=""):
         if self.isRecording:
             self.stopCapture()
 
@@ -51,6 +53,7 @@ class AudioDevice:
 
         if ffmpeg.captureAudio(self, filename):
             self.isRecording = True
+            utils.log(self, f"start ({filename})")
         else:
             utils.error(f"starting to capture failed {self.name}")
 
@@ -61,6 +64,7 @@ class AudioDevice:
             return
         
         print(f"stopping capturing {self.name} ({self.url})")
+        utils.log(self, "stop")
 
         if self.process == None:
             utils.warn(f"capturing process not available")

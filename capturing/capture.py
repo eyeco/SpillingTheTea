@@ -171,13 +171,11 @@ class CaptureManager:
 manager = CaptureManager()
 # dispatch = dispatcher.Dispatcher()
 
-# utils.checkOrCreate(AudioDevice.captureDir)
-# utils.checkOrCreate(VideoDevice.captureDir)
+def cleanup():
+    manager.cleanup()
+    utils.logger.close()
 
-# def cleanup():
-#     manager.cleanup()
-
-# atexit.register(cleanup)
+atexit.register(cleanup)
 
 # # # Map OSC addresses to the manager functions
 # dispatch.map("/study/start", manager.oscStartCapture)
@@ -195,3 +193,11 @@ manager = CaptureManager()
 #     time.sleep(3)
 #     manager.audio[0].stopCapture()
 
+
+v = manager.video[0].startCapture()
+a = manager.audio[0].startCapture()
+time.sleep(3)
+if v:
+    manager.video[0].stopCapture()
+if a:
+    manager.audio[0].stopCapture()
