@@ -14,6 +14,33 @@ import atexit
 from pythonosc import osc_server
 from pythonosc import dispatcher
 
+oscStartCommand = "/start"
+oscStopCommand = "/stop"
+oscMarkerCommand = "/marker"
+
+oscPort = 6667
+
+import sys
+import traceback
+class SafeThreadingOSCServer(osc_server.ThreadingOSCUDPServer):
+    def handle_error(self, request, client_address):
+        exc_type, exc_value, exc_traceback = sys.exc_info()
+
+        utils.error(f"error while processing OSC data:\n\t{exc_type.__name__ if exc_type else 'Unknown'}\n\tError Message: {exc_value}")
+
+        # utils.error(f"OSC: Caught an issue from {client_address}:\nError Type:    {exc_type.__name__ if exc_type else 'Unknown'}\nError Message: {exc_value}")
+
+        # # 2. OPTIONAL: If it's a completely unexpected error (not the regular expression TypeError),
+        # # print the mini stack trace so you can debug your handler functions!
+        # if exc_type is not TypeError:
+        #     utils.warn("OSC: Unexpected error detected! Printing shorthand stack trace:")
+        #     # Prints just the last 2 frames of the track so your console stays tidy
+        #     traceback.print_exception(exc_type, exc_value, exc_traceback, limit=2)
+        # else:
+        #     utils.warn("suppressed expected trailing-byte Type-Mismatch error.")
+
+        pass
+
 class Config:
 
     def __init__(self):
@@ -80,6 +107,9 @@ class CaptureManager:
     def __init__(self):
 
         config = Config()
+
+        self.isClosing = False
+        self.isCapturing = False
 
         lines = ffmpeg.enum()
 
@@ -155,35 +185,100 @@ class CaptureManager:
             v.cleanup()
         
     def oscStartCapture(self, address, *args):
-        deviceID = args[0]
-        fileName = args[1]
+        if len(args) > 1:
+            utils.warn(f"invalid number of arguments in osc {oscStartCommand}: {len(args)}, using first one as name: {args[0]}")
 
-        print(f"OSC: received START capture ({deviceID}, {fileName})")
+        try:
+            fileName = ""
+            if len(args) == 0:
+                utils.warn(f"argument missing in osc {oscStartCommand}: {len(args)} - using blank name")
+            else:
+                fileName = args[0]
+            print(f"OSC: received START capture (name: \"{fileName}\")")
+
+
+            if self.isClosing:
+                utils.warn("currently closing, try again later")
+                return
+            if self.isCapturing:
+                utils.warn("already capturing")
+                return
+
+            for v in self.video:
+                v.startCapture(fileName)
+            for a in self.audio:
+                a.startCapture(fileName)
+
+            self.isCapturing = True
+
+        except Exception as e:
+            utils.error(f"caught exception in oscStartCapture: \"{e}\"")
 
     def oscStopCapture(self, address, *args):
-        deviceID = args[0]
-        fileName = args[1]
+        try:
+            print(f"OSC: received STOP capture: {address}")
 
-        print(f"OSC: received STOP capture ({deviceID}, {fileName})")
+            if not self.isCapturing:
+                utils.warn("not currently capturing")
+                return
+            if self.isClosing:
+                utils.warn("closing already in progress")
+                return
+            
+            self.isClosing = True
 
-    
+            for v in self.video:
+                v.stopCapture()
+            for a in self.audio:
+                a.stopCapture()
+
+            self.isCapturing = False
+            self.isClosing = False
+
+        except Exception as e:
+            utils.error(f"caught exception in oscStopCapture: \"{e}\"")
+
+class MarkerManager:
+
+    def oscMarker(self, address, *args):
+
+        msg = ""
+        if len(args) == 0:
+            utils.warn(f"no arguments in {oscMarkerCommand}: {len(args)}")
+            msg = "<empty>"
+        else:
+            msg = " ".join(args)
+        
+        print(f"received marker: {msg}")
+
+        if not capture.isCapturing:
+            utils.warn("received trigger while capturing")
+
+        utils.log(self, msg)
+
+    def desc(self):
+        return "marker"
+
 # # --- OSC Server Setup ---
-manager = CaptureManager()
-# dispatch = dispatcher.Dispatcher()
+capture = CaptureManager()
+marker = MarkerManager()
+dispatch = dispatcher.Dispatcher()
+# server = osc_server.ThreadingOSCUDPServer(("127.0.0.1", oscPort), dispatch)
+server = SafeThreadingOSCServer(("127.0.0.1", oscPort), dispatch)
 
 def cleanup():
-    manager.cleanup()
+    capture.cleanup()
     utils.logger.close()
 
 atexit.register(cleanup)
 
-# # # Map OSC addresses to the manager functions
-# dispatch.map("/study/start", manager.oscStartCapture)
-# dispatch.map("/study/stop", manager.oscStopCapture)
+# # Map OSC addresses to the manager functions
+dispatch.map(oscStartCommand, capture.oscStartCapture)
+dispatch.map(oscStopCommand, capture.oscStopCapture)
+dispatch.map(oscMarkerCommand, marker.oscMarker)
 
-# server = osc_server.BlockingOSCUDPServer(("127.0.0.1", 5005), dispatch)
-# print("Listening for OSC on port 5005...")
-# server.serve_forever()
+print(f"Listening for OSC on port {oscPort}...")
+server.serve_forever()
 
 # if manager.video[0].startCapture("test") == True:
 #     time.sleep(3)
@@ -194,10 +289,10 @@ atexit.register(cleanup)
 #     manager.audio[0].stopCapture()
 
 
-v = manager.video[0].startCapture()
-a = manager.audio[0].startCapture()
-time.sleep(3)
-if v:
-    manager.video[0].stopCapture()
-if a:
-    manager.audio[0].stopCapture()
+# v = manager.video[0].startCapture()
+# a = manager.audio[0].startCapture()
+# time.sleep(3)
+# if v:
+#     manager.video[0].stopCapture()
+# if a:
+#     manager.audio[0].stopCapture()

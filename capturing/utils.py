@@ -64,6 +64,7 @@ class Logger:
             self.writer.writerow(self.columns)
 
     def write(self, ts, desc, msg):
+        print(f"logging: {desc}: {msg}")
         dt = datetime.fromtimestamp(ts).strftime('%Y-%m-%d %H:%M:%S.%f')[:-3]
         self.writer.writerow([ts,dt,desc,msg])
         self.file.flush()
@@ -73,10 +74,14 @@ class Logger:
             print("closing CSV file")
             self.file.close()
 
+global logger
 logger = Logger()
 
 def log(device,event):
-    if event.find(',') != -1:
-        warn(f"string {event} contains comma - replacing by _ for CSV")
-        event = event.replace(',','_')
-    logger.write(time.time(), device.desc(), event)
+    try:
+        if event.find(',') != -1:
+            warn(f"string {event} contains comma - replacing by _ for CSV")
+            event = event.replace(',','_')
+        logger.write(time.time(), device.desc(), event)
+    except Exception as e:
+        error(f"caught exception during logging: {e}")
