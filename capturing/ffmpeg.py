@@ -4,6 +4,7 @@ import utils
 
 import os
 import subprocess
+from pathlib import Path
 
 def enum():
     cmd = [
@@ -96,6 +97,55 @@ def captureAudio(device, filename):
 
     return True
 
+def snapshot(device, filename):
+
+    utils.checkOrCreate(utils.snapshotDir)
+
+    if not filename.lower().endswith('.jpg') and not filename.lower().endswith('.jpeg'):
+        path = Path(filename)
+        newname = str(path.with_suffix('.jpg'))
+        utils.warn(f"file {filename} will be modified to {newname} - only jpeg supported")
+        filename = newname
+
+    pathPic = os.path.join(utils.snapshotDir, filename)
+    pathLog = os.path.splitext(pathPic)[0] + ".log"
+
+    if os.path.exists(pathPic):
+        utils.error(f"file {filename} already exists in {utils.snapshotDir} - will not overwrite")
+        return False
+    
+    print(f"saving snapshot to file {pathPic}")
+
+    cmd = [
+        'ffmpeg', '-hide_banner',
+        '-y', # overwrite
+        '-f', 'dshow',
+        '-video_size', '1280x720',
+        '-i', f'video={device.url}', 
+        '-ss', '00:00:01',
+        '-vframes', '1',
+        '-q:v', '2', 
+        pathPic
+    ]
+
+    utils.logcmd(f"{' '.join(cmd)}")
+
+    process = None
+
+    try:
+        logFile = open(pathLog, "w")
+        process = subprocess.Popen(cmd, stderr=logFile, stdin=subprocess.PIPE, text=True)
+        #process = subprocess.Popen(cmd, stdin=subprocess.PIPE, stderr=self.logFile, text=True)
+    except FileNotFoundError:
+        utils.error("FFmpeg was not found. Is it installed and in your PATH?")
+    except OSError as e:
+        utils.error(f"Failed to launch process: {e}")
+
+    device.process = process
+    device.logFile = logFile
+
+    return True
+
 def captureVideo(device, filename, tryMJPEG):
 
     utils.checkOrCreate(utils.videoCaptureDir)
@@ -118,6 +168,8 @@ def captureVideo(device, filename, tryMJPEG):
         '-use_wallclock_as_timestamps', '1',
 
         '-pixel_format', format, 
+        # '-video_size', '640x480',
+        # '-framerate', '25',
 
         '-i', f'video={device.url}',
         #'-c:v', 'libx264', '-preset', 'veryfast', 

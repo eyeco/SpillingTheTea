@@ -15,6 +15,7 @@ RESET = "\033[0m"
 outdir = "L:\\stt"
 audioCaptureDir = f'{outdir}\\audio'
 videoCaptureDir = f'{outdir}\\video'
+snapshotDir = f'{outdir}\\snapshots'
 
 def error(str):
     print(f"{RED}ERROR: {str}{RESET}")

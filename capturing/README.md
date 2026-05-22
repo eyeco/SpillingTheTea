@@ -9,7 +9,7 @@ tested with Python 3.10.12
 - GUI
 - find audio channels associated with video, to capture audio+video from each webcam
 - HW-accelerated encoding
-- MJPEG streaming from webcam
+- MJPEG/H.264/H.265 streaming from webcam
 - check if IDs are conflicting in config.json (e.g., using ID 0 twice)
 
 ## How to use
