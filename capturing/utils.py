@@ -53,6 +53,8 @@ class Logger:
 
     def __init__(self, filename="event-log.csv"):
 
+        checkOrCreate(outdir)
+
         path = f"{outdir}\\{filename}"
 
         exists = os.path.exists(path) and os.path.getsize(path) > 0
