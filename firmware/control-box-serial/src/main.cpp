@@ -1,5 +1,7 @@
 /*
- * ESP32 Feather V2: SPI pressure sensor + GP8403 DAC bridge
+ * ESP32 Feather V2
+ * Amphenol ELVH-030G-HAND-C-PSA4 SPI pressure sensor
+ * GP8403 DAC bridge
  *
  * Channel mapping:
  *   inflate  -> GP8403 channel 0
@@ -17,9 +19,14 @@
 #include <SPI.h>
 #include "DFRobot_GP8403.h"
 
+// outgoing data
 const int DID = 0;			// device ID
 const int PRESSURE_SID = 0;	// sensor ID for pressure sensor data
 const int CHANNEL_SID = 0;	// sensor ID for channel data
+
+// incoming data
+const int PID_DID = 1;		// PID controller's device ID
+const int PID_SID = 1;		// PID controller's sensor ID
 
 const int CHAMBER_COUNT = 1;
 const int CHAMBER_COUNT_MAX = 6;
@@ -93,7 +100,7 @@ const unsigned long UPDATE_INTERVAL_MS = 5;
 //   pressure: 1 Bar
 // -----------------------------
 float pressureOffset = 3440;
-float pressureScale = 30.0 / 3470 * 0.026;
+float pressureScale = 30.0 / 3470;
 
 // -----------------------------
 // Runtime variables
@@ -135,24 +142,29 @@ void readInput()
 		DataType outType = DT_FLOAT;
 		SampleFrame *sf = nullptr;
 
-		switch (msg.hdr.hdr.type)
+		if (msg.hdr.hdr.deviceID == PID_DID && msg.hdr.hdr.sensorID == PID_SID)
 		{
-		case MT_VALUE:
-			sf = parser.createFrameFromSingleValue(msg.hdr.hdr, msg.data, outType);
-			break;
-		case MT_ARRAY:
-			sf = parser.createFrameFromArray(msg.hdr.hdr, msg.data, outType);
-			break;
-		case MT_MATRIX:
-			sf = parser.createFrameFromMatrix(msg.hdr.hdr, msg.data, outType);
-			break;
-		case MT_IMAGE:
-			sf = parser.createFrameFromImage(msg.hdr.hdr, msg.data, outType);
-			break;
-		default:
-			//TODO: error handling
-			break;
+			switch (msg.hdr.hdr.type)
+			{
+			case MT_VALUE:
+				sf = parser.createFrameFromSingleValue(msg.hdr.hdr, msg.data, outType);
+				break;
+			case MT_ARRAY:
+				sf = parser.createFrameFromArray(msg.hdr.hdr, msg.data, outType);
+				break;
+			case MT_MATRIX:
+				sf = parser.createFrameFromMatrix(msg.hdr.hdr, msg.data, outType);
+				break;
+			case MT_IMAGE:
+				sf = parser.createFrameFromImage(msg.hdr.hdr, msg.data, outType);
+				break;
+			default:
+				//TODO: error handling
+				break;
+			}
 		}
+
+		safeDeleteArray( msg.data );
 
 		if (!sf)
 		{
