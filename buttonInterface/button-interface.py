@@ -11,6 +11,9 @@ class ButtonInterfaceApp(tk.Tk):
 
         self.oscClient = SimpleUDPClient(oscIP, oscPort)
 
+        self.oscIP = oscIP
+        self.oscPort = oscPort
+
         main = tk.Frame(self)
         main.pack(fill="both", expand=True, padx=10, pady=10)
         
@@ -80,12 +83,13 @@ class ButtonInterfaceApp(tk.Tk):
         value = 1
 
         try:
+            msg = f"/{command}"
             # send_message(OSC_Address, Value)
-            self.oscClient.send_message(command, value)
+            self.oscClient.send_message(msg, value)
             
             # Update GUI status
-            self.statusLabel.config(text=f"Sent: /{command} -> {value}")
-            print(f"OSC Sent to {command}: {value}")
+            self.statusLabel.config(text=f"Sent: {msg} -> {value}")
+            print(f"OSC Sent to {self.oscIP}:{self.oscPort}: {command} -> {value}")
             
         except Exception as e:
             self.status_label.config(text=f"Error sending message!")
