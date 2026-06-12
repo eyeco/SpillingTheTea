@@ -10,8 +10,8 @@
 
 #include <Arduino.h>
 
-#define _NOSPI
-#define _NODAC
+//#define _NOSPI
+//#define _NODAC
 
 //#define _OSC_DEBUG
 
@@ -130,8 +130,8 @@ const unsigned long UPDATE_INTERVAL_MS = 5;
 //   measurement: 39
 //   pressure: 1 Bar
 // -----------------------------
-float pressureOffset = 3440;
-float pressureScale = 30.0 / 3470;
+const float PRESSURE_OFFSET = 3440.0f;
+const float PRESSURE_SCALE = 30.0f / 3470.0f;
 
 // -----------------------------
 // Runtime variables
@@ -322,7 +322,7 @@ float readPressure(uint8_t id)
 	// 14 bit pressure data mapping 100 PSI
 	raw = ( raw & 0x3fff0000 ) >> 16;
 
-	return std::max(( raw - pressureOffset ) * pressureScale, 0.0f);
+	return std::max(( raw - PRESSURE_OFFSET ) * PRESSURE_SCALE, 0.0f);
 }
 #endif
 
