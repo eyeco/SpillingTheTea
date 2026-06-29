@@ -117,30 +117,36 @@ class CaptureManager:
             print(f"- {foundVideo[v]} ({v})")
 
         self.audio = []
-        for a in config.audio:
-            url = config.audio[a]
-            try:
-                device = foundAudio[url]
-            except KeyError:
-                device = None
-            if device:
-                print(f"creating audio device ID: {a}, name: {device}, url: {url}")
-                self.audio.append(AudioDevice(a, device, url))
-            else:
-                utils.error(f"audio device not available: {a} ({url})")
+        if config.audio:
+            for a in config.audio:
+                url = config.audio[a]
+                try:
+                    device = foundAudio[url]
+                except KeyError:
+                    device = None
+                if device:
+                    print(f"creating audio device ID: {a}, name: {device}, url: {url}")
+                    self.audio.append(AudioDevice(a, device, url))
+                else:
+                    utils.error(f"audio device not available: {a} ({url})")
+        else:
+            utils.warn("no audio devices specified")
 
         self.video = []
-        for v in config.video:
-            url = config.video[v]
-            try:
-                device = foundVideo[url]
-            except KeyError:
-                device = None
-            if device:
-                print(f"creating video device ID: {v}, name: {device}, url: {url}")
-                self.video.append(VideoDevice(v, device, url))
-            else:
-                utils.error(f"video device not available: {v} ({url})")
+        if config.video:
+            for v in config.video:
+                url = config.video[v]
+                try:
+                    device = foundVideo[url]
+                except KeyError:
+                    device = None
+                if device:
+                    print(f"creating video device ID: {v}, name: {device}, url: {url}")
+                    self.video.append(VideoDevice(v, device, url))
+                else:
+                    utils.error(f"video device not available: {v} ({url})")
+        else:
+            utils.warn("no video devices specified")
 
         # print(f"FOUND {len(self.audio)} AUDIO DEVICES:")
         # for i,a in enumerate(self.audio):
@@ -245,26 +251,13 @@ def cleanup():
 atexit.register(cleanup)
 
 # # Map OSC addresses to the manager functions
-dispatch.map(oscStartCommand, capture.oscStartCapture)
-dispatch.map(oscStopCommand, capture.oscStopCapture)
-dispatch.map(oscMarkerCommand, marker.oscMarker)
+dispatch.map(osc.startCommand, capture.oscStartCapture)
+dispatch.map(osc.stopCommand, capture.oscStopCapture)
+dispatch.map(osc.markerCommand, marker.oscMarker)
 
-print(f"Listening for OSC on port {oscPort}...")
+print(f"Listening for OSC on port {osc.port}...")
 server.serve_forever()
 
-# if manager.video[0].startCapture("test") == True:
-#     time.sleep(3)
-#     manager.video[0].stopCapture()
-
-# if manager.audio[0].startCapture("test") == True:
-#     time.sleep(3)
-#     manager.audio[0].stopCapture()
-
-
-# v = manager.video[0].startCapture()
-# a = manager.audio[0].startCapture()
-# time.sleep(3)
-# if v:
-#     manager.video[0].stopCapture()
-# if a:
-#     manager.audio[0].stopCapture()
+#v = capture.video[0]
+#ffmpeg.snapshot(v, 'test')
+#time.sleep(5)

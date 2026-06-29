@@ -54,3 +54,10 @@ for v,url in zip(video,videoURL):
         max = l.find("max")
         if px != -1 and min != -1 and max != -1:
             print(f"\t\t{l[px:]}")
+    print(f"\t\tcodecs:")
+    for l in lines:
+        cd = l.find("vcodec=")
+        min = l.find("min")
+        max = l.find("max")
+        if cd != -1 and min != -1 and max != -1:
+            print(f"\t\t{l[cd:]}")

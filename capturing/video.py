@@ -19,6 +19,18 @@ class VideoDevice:
         self.isRecording = False
         self.supportsMJPEG = self.checkMJPEG()
 
+        ### 720p
+        self.width = 1280
+        self.height = 720
+        self.fps = 15
+        self.bitrate = '4M'
+
+        ### full-HD
+        # self.width = 1920
+        # self.height = 1080
+        # self.fps = 15
+        # self.bitrate = '8M'
+
         self.process = None
         self.logFile = None
 
@@ -92,7 +104,7 @@ class VideoDevice:
         self.isRecording = False
 
     def checkMJPEG(self):
-        lines = ffmpeg.videoOptions(self)
+        lines = ffmpeg.videoOptions(self.url)
         print(f"checking for MJPEG support ({self.url})")
         for l in lines:
             l = l.lstrip()

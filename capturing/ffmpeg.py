@@ -4,6 +4,7 @@ import utils
 
 import os
 import subprocess
+import datetime
 from pathlib import Path
 
 def enum():
@@ -159,21 +160,32 @@ def captureVideo(device, filename, tryMJPEG):
 
     print(f"starting to record file {pathVid}")
 
-    format = 'yuyv422'
+    initial_timecode = datetime.datetime.now().strftime("%H:%M:%S:00")
+
+    option = '-pixel_format'
+    value = 'yuyv422'
     if tryMJPEG == True and device.supportsMJPEG == True:
-        format = 'mjpeg'
+        option = '-vcodec'
+        value = 'mjpeg'
     cmd = [
         'ffmpeg', '-hide_banner',
         '-f', 'dshow', 
         '-use_wallclock_as_timestamps', '1',
 
-        '-pixel_format', format, 
-        # '-video_size', '640x480',
-        # '-framerate', '25',
+        option, value, 
+        '-video_size', f'{device.width}x{device.height}',
+        '-framerate', f'{device.fps}',
 
         '-i', f'video={device.url}',
-        #'-c:v', 'libx264', '-preset', 'veryfast', 
+
+        #'-c:v', 'libx264', '-preset', 'veryfast', '-pix_fmt', 'yuv420p',
+        '-c:v', 'libx264', '-preset', 'ultrafast', '-pix_fmt', 'yuv420p',
+
+        #'-b:v', device.bitrate,
         #'-c:a', 'aac',
+
+        "-timecode", initial_timecode,
+
         pathVid
     ]
     utils.logcmd(f"{' '.join(cmd)}")
