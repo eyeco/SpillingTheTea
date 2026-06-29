@@ -23,10 +23,10 @@
 
 const int SIG_PIN = A2;
 
-const int MUX_S0 = 5;
-const int MUX_S1 = 18;
-const int MUX_S2 = 19;
-const int MUX_S3 = 16;
+const int MUX_S0 = 16;
+const int MUX_S1 = 19;
+const int MUX_S2 = 18;
+const int MUX_S3 = 5;
 
 #if defined(ESP32)
   // ESP32 defaults to 12-bit (0 - 4095)
