@@ -17,6 +17,12 @@ class AudioDevice:
 
         self.isRecording = False
 
+        self.channels = 1
+        self.rate = 48000
+        self.bits = 16
+        self.bitrate = '192k'
+
+
         self.process = None
         self.logFile = None
 

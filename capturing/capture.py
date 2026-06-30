@@ -183,10 +183,10 @@ class CaptureManager:
                 utils.warn("already capturing")
                 return
 
-            for v in self.video:
-                v.startCapture(fileName)
             for a in self.audio:
                 a.startCapture(fileName)
+            for v in self.video:
+                v.startCapture(fileName)
 
             self.isCapturing = True
 

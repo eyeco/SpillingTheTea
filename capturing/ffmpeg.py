@@ -65,19 +65,28 @@ def captureAudio(device, filename):
     
     print(f"starting to record file {pathAud}")
 
-    channels = 1
-    rate = 48000
-    bits = 16
+    initial_timecode = datetime.datetime.now().strftime("%H:%M:%S:00")
+
     cmd = [
         'ffmpeg', '-hide_banner',
         '-f', 'dshow', 
         '-use_wallclock_as_timestamps', '1',
 
-        '-channels', f'{channels}',
-        '-sample_rate', f'{rate}',
-        '-sample_size', f'{bits}',
+        '-channels', f'{device.channels}',
+        '-sample_rate', f'{device.rate}',
+        '-sample_size', f'{device.bits}',
 
         '-i', f'audio={device.url}',
+
+        #'-af', 'aresample=async=1:first_pts=0',
+        '-async', '1',
+
+        '-c:a', 'aac',
+
+        '-b:a', device.bitrate,
+
+        "-timecode", initial_timecode,
+
         pathAud
     ]
     utils.logcmd(f"{' '.join(cmd)}")
