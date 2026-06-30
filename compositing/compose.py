@@ -8,21 +8,14 @@ videoCaptureDir = f'{indir}\\video'
 
 outdir = "L:\\stt"
 
-setName = 'test2'
+setName = 'test0'
 chapter_source = "chapters.txt"
 
 audio_HW_lag = 0.5
 
 video_target = setName + "-synced.mp4"
 
-# videos = [
-#     {"path": "0--2026-06-29 13-27-14.mp4", "offset": 0, "startTS": 0, "label": "cam0"},
-#     {"path": "1--2026-06-29 13-27-14.mp4", "offset": 0, "startTS": 0, "label": "cam1"},
-#     {"path": "2--2026-06-29 13-27-15.mp4", "offset": 0, "startTS": 0, "label": "cam2"},
-#     {"path": "3--2026-06-29 13-27-15.mp4", "offset": 0, "startTS": 0, "label": "cam3"}
-# ]
 
-# audio = {"path": "0--2026-06-29 13-27-15.aac", "offset": 0, "startTS": 0}
 
 def getFiles(name,dir,exts):
 
