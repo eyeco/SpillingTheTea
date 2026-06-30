@@ -190,7 +190,7 @@ def captureVideo(device, filename, tryMJPEG):
         #'-c:v', 'libx264', '-preset', 'veryfast', '-pix_fmt', 'yuv420p',
         '-c:v', 'libx264', '-preset', 'ultrafast', '-pix_fmt', 'yuv420p',
 
-        #'-b:v', device.bitrate,
+        '-b:v', device.bitrate,
         #'-c:a', 'aac',
 
         "-timecode", initial_timecode,
