@@ -79,7 +79,9 @@ def captureAudio(device, filename):
         '-i', f'audio={device.url}',
 
         #'-af', 'aresample=async=1:first_pts=0',
-        '-async', '1',
+        '-async', '1',              # prevent timestamp drifting
+
+        '-flush_packets', '1',      # don't buffer, bypass windows cache
 
         '-c:a', 'aac',
 
@@ -186,6 +188,8 @@ def captureVideo(device, filename, tryMJPEG):
         '-framerate', f'{device.fps}',
 
         '-i', f'video={device.url}',
+
+        '-flush_packets', '1',      # don't buffer, bypass windows cache
 
         #'-c:v', 'libx264', '-preset', 'veryfast', '-pix_fmt', 'yuv420p',
         '-c:v', 'libx264', '-preset', 'ultrafast', '-pix_fmt', 'yuv420p',
