@@ -9,7 +9,9 @@ import subprocess
 
 class VideoDevice:
 
-    ext = ".mp4"
+    # ext = ".mp4"  ## NOTE: issue with 64-bit timestamps - cause overflow and crash for longer videos in movenc.c before writing the file index (moov atom) 
+                    ## solution: either use mkv (supports 64-bit TS) or allow 64-bit TS in mp4 with '-movflags +use_metadata_tags'
+    ext = ".mkv"
 
     def __init__(self, id, name, url):
         self.id = id
