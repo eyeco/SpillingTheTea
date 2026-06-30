@@ -36,10 +36,10 @@ def getFiles(name,dir,exts):
 
         subs = f.split('--')
         if len(subs) == 3:
-            if not subs[1].lower() == name.lower():
+            if not subs[0].lower() == name.lower():
                 continue
 
-            id = int(subs[0])
+            id = int(subs[1])
             ret.append( {"path": f, "offset": 0, "startTS": 0, "label": f"cam{id}"} )
 
     return ret
