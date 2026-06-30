@@ -1,6 +1,8 @@
-import subprocess
 import os
 import re
+import csv
+import random
+import subprocess
 
 indir = "L:\\stt"
 audioCaptureDir = f'{indir}\\audio'
@@ -8,14 +10,70 @@ videoCaptureDir = f'{indir}\\video'
 
 outdir = "L:\\stt"
 
-setName = 'test0'
-chapter_source = "chapters.txt"
+setName = 'test6'
+
+#chapterFile = setName + "-chapters.txt"
+chapterFile = setName + "-chapters.xml"
 
 audio_HW_lag = 0.5
 
-video_target = setName + "-synced.mp4"
+targetExt = ".mkv"
+
+videoTarget = setName + "-synced" + targetExt
+
+def formatTimeMKV(seconds):
+
+    hours = int(seconds // 3600)
+    minutes = int((seconds % 3600) // 60)
+    secs = int(seconds % 60)
+    
+    nanoseconds = int(round((seconds - int(seconds)) * 1_000_000_000))
+    return f"{hours:02d}:{minutes:02d}:{secs:02d}.{nanoseconds:09d}"
 
 
+def generateChaptersMKV(inFile, outFile, maxTS):
+    rows = []
+
+    with open(os.path.join(indir, inFile), 'r', newline='', encoding='utf-8') as f:
+        reader = csv.DictReader(f)
+        for row in reader:
+            if row["device"].lower() == "marker":
+                rows.append(row)
+
+    xml = [
+        '<?xml version="1.0" encoding="UTF-8"?>',
+        '<Chapters>',
+        '  <EditionEntry>'
+    ]
+
+    # Generate a random unique 64-bit based ID
+    baseID = random.randint(1000000000000000, 8999999999999999)
+
+    for i, row in enumerate(rows):
+        relTS = float(row['timestamp']) - maxTS
+        mkvStartTime = formatTimeMKV(relTS + audio_HW_lag)
+        chapterName = row['event']
+        
+        
+        xml.extend([
+            f'    <ChapterAtom>',
+            f'      <ChapterUID>{baseID + i}</ChapterUID>',
+            f'      <ChapterTimeStart>{mkvStartTime}</ChapterTimeStart>',
+            f'      <ChapterDisplay>',
+            f'        <ChapterString>{chapterName}</ChapterString>',
+            f'        <ChapterLanguage>eng</ChapterLanguage>',
+            f'      </ChapterDisplay>',
+            f'    </ChapterAtom>'
+        ])
+            
+    xml.extend([
+        '  </EditionEntry>',
+        '</Chapters>'
+    ])
+    
+    # Step 3: Write the finalized text strings to file
+    with open(os.path.join(indir, outFile), 'w', encoding='utf-8') as f:
+        f.write('\n'.join(xml))
 
 def getFiles(name,dir,exts):
 
@@ -101,6 +159,9 @@ print("-----------------------------")
 print(f"max ts: {maxTS}")
 print("-----------------------------")
 
+generateChaptersMKV(f'{setName}-log.csv', chapterFile, maxTS)
+
+
 for i, cam in enumerate(videos):
     cam['offset'] = maxTS - cam['startTS']
     print(f"v{i} offset: {cam['offset']}")
@@ -142,10 +203,14 @@ ffmpeg_cmd = [
     "ffmpeg", "-hide_banner"
 ]
 
+audioIndex = len(videos)
+metaDataIndex = audioIndex + 1
+
+
+#inputs.extend(["-f", "ffmetadata", "-i", os.path.join(indir, chapterFile), "-map_metadata", f"{metaDataIndex}"])  #FF METADATA
+
 # Add our shifted inputs
 ffmpeg_cmd.extend(inputs)
-
-audioIndex = len(videos)
 
 # Add processing instructions and point to our GPU encoder
 ffmpeg_cmd.extend([
@@ -161,7 +226,7 @@ ffmpeg_cmd.extend([
     "-c:a", "aac",
     "-b:a", "192k",
 
-    os.path.join(outdir, video_target)
+    os.path.join(outdir, videoTarget)
 ])
 
 #print("\n\r".join(ffmpeg_cmd))
@@ -169,4 +234,15 @@ ffmpeg_cmd.extend([
 # Print out the command line string for manual inspection
 print("Generated Command:\n", " ".join(ffmpeg_cmd))
 
+print("starting encoder")
 subprocess.run(ffmpeg_cmd)
+print("encoding done")
+
+mkvpropedit_cmd = [
+    "mkvpropedit", os.path.join(outdir, videoTarget), "--chapters", os.path.join(indir, chapterFile)
+]
+
+print("injecting chapters")
+print("Generated Command:\n", " ".join(mkvpropedit_cmd))
+subprocess.run(mkvpropedit_cmd)
+print("done")
