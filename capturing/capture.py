@@ -75,12 +75,11 @@ class Config:
             dict = json.load(f)
             return dict
 
-
 class CaptureManager:
     def __init__(self):
 
         config = Config()
-
+        
         self.isClosing = False
         self.isCapturing = False
 
@@ -162,7 +161,7 @@ class CaptureManager:
         print("cleaning up video devices")
         for v in self.video:
             v.cleanup()
-        
+
     def oscStartCapture(self, address, *args):
         if len(args) > 1:
             utils.warn(f"invalid number of arguments in osc {osc.startCommand}: {len(args)}, using first one as name: {args[0]}")
@@ -175,7 +174,6 @@ class CaptureManager:
                 fileName = args[0]
             print(f"OSC: received START capture (name: \"{fileName}\")")
 
-
             if self.isClosing:
                 utils.warn("currently closing, try again later")
                 return
@@ -183,10 +181,13 @@ class CaptureManager:
                 utils.warn("already capturing")
                 return
 
+            utils.logger.open(f"{fileName}-log.csv")
+
             for a in self.audio:
                 a.startCapture(fileName)
             for v in self.video:
                 v.startCapture(fileName)
+            print(f"started ffmpeg instances for {len(self.audio)} audio and {len(self.video)} video devices")
 
             self.isCapturing = True
 
@@ -210,6 +211,8 @@ class CaptureManager:
                 v.stopCapture()
             for a in self.audio:
                 a.stopCapture()
+            utils.logger.close()
+            print(f"stopped ffmpeg instances for {len(self.audio)} audio and {len(self.video)} video devices")
 
             self.isCapturing = False
             self.isClosing = False
@@ -231,7 +234,7 @@ class MarkerManager:
         print(f"received marker: {msg}")
 
         if not capture.isCapturing:
-            utils.warn("received trigger while capturing")
+            utils.warn("received trigger while not capturing")
 
         utils.log(self, msg)
 
