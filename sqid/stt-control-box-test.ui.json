@@ -1,16 +1,22 @@
 {
   "interfaces": [
     {
+      "objectID": "256D5986-1322-567A-FD24-0076C17AD13C",
+      "x": -1419.2276611328125,
+      "y": -862.33740234375,
+      "z": 42.72589874267578
+    },
+    {
       "objectID": "693C3FDC-61F6-5F2D-861F-F02B047EBD42",
-      "x": 351.5,
-      "y": 309.0,
-      "z": 5.13599967956543
+      "x": 261.9977722167969,
+      "y": -24.03155517578125,
+      "z": 16.670021057128906
     }
   ],
   "ops": [
     {
       "activeDrawerID": "DD1010AE-A63C-4736-906A-E7FF4C8DCAEB",
-      "classID": "A820115B-4E97-488B-9A0F-EEF71C3E0E95",
+      "classID": "F79A8221-2671-4E1D-A611-FFC2D51F96A4",
       "collapsed": false,
       "drawers": [
         {
@@ -33,8 +39,8 @@
           "drawInfo": true,
           "lineWidth": 1.5,
           "name": "lines (hist)",
-          "offset": 0.0,
-          "scale": 0.10000000149011612
+          "offset": -1.0,
+          "scale": 0.20000000298023224
         },
         {
           "bufferSize": 64,
@@ -42,92 +48,14 @@
           "name": "map (hist)"
         }
       ],
-      "objectID": "5D3E310C-6F75-395B-384B-6133591C064D",
-      "x": -1.5,
-      "y": 30.0,
-      "z": 6.13599967956543
+      "objectID": "76211800-1ECD-1392-1901-6F4C5C08B62D",
+      "x": -284.347900390625,
+      "y": 68.38766479492188,
+      "z": 47.911861419677734
     },
     {
       "activeDrawerID": "BFC43774-23B5-4692-82C3-00A09EC72114",
-      "classID": "9B0C9707-2EB0-4551-99D8-9863E1580F06",
-      "collapsed": false,
-      "drawers": [
-        {
-          "classID": "BFC43774-23B5-4692-82C3-00A09EC72114",
-          "name": "map"
-        },
-        {
-          "autoScale": false,
-          "classID": "A2BDB410-F257-4360-8615-B821BE548FBD",
-          "drawInfo": true,
-          "lineWidth": 1.5,
-          "name": "lines (x=t)",
-          "offset": 0.0,
-          "scale": 1.0
-        },
-        {
-          "autoScale": false,
-          "bufferSize": 64,
-          "classID": "DD1010AE-A63C-4736-906A-E7FF4C8DCAEB",
-          "drawInfo": true,
-          "lineWidth": 1.5,
-          "name": "lines (hist)",
-          "offset": 0.0,
-          "scale": 1.0
-        },
-        {
-          "bufferSize": 64,
-          "classID": "723FA6EE-CB10-4ED5-848C-1F75672ED1F1",
-          "name": "map (hist)"
-        }
-      ],
-      "objectID": "40175212-7DDA-0F4A-4414-294DED2F7970",
-      "x": 92.90390014648438,
-      "y": 1035.65380859375,
-      "z": 9.268003463745117
-    },
-    {
-      "activeDrawerID": "A2BDB410-F257-4360-8615-B821BE548FBD",
-      "classID": "40DE5B8D-4FCF-4A69-A65C-EBCC94D86034",
-      "collapsed": false,
-      "drawers": [
-        {
-          "classID": "BFC43774-23B5-4692-82C3-00A09EC72114",
-          "name": "map"
-        },
-        {
-          "autoScale": false,
-          "classID": "A2BDB410-F257-4360-8615-B821BE548FBD",
-          "drawInfo": true,
-          "lineWidth": 1.5,
-          "name": "lines (x=t)",
-          "offset": 0.0,
-          "scale": 0.25
-        },
-        {
-          "autoScale": false,
-          "bufferSize": 64,
-          "classID": "DD1010AE-A63C-4736-906A-E7FF4C8DCAEB",
-          "drawInfo": true,
-          "lineWidth": 1.5,
-          "name": "lines (hist)",
-          "offset": 0.0,
-          "scale": 1.0
-        },
-        {
-          "bufferSize": 64,
-          "classID": "723FA6EE-CB10-4ED5-848C-1F75672ED1F1",
-          "name": "map (hist)"
-        }
-      ],
-      "objectID": "41B42814-5C26-40CA-1E79-D4564F3DF90F",
-      "x": 724.5,
-      "y": -29.5,
-      "z": 4.101999282836914
-    },
-    {
-      "activeDrawerID": "BFC43774-23B5-4692-82C3-00A09EC72114",
-      "classID": "31D14E08-DB80-40F5-A1A7-B7B7F856A354",
+      "classID": "6637087B-12A4-486B-8052-4948EB98EF19",
       "collapsed": true,
       "drawers": [
         {
@@ -159,13 +87,403 @@
           "name": "map (hist)"
         }
       ],
-      "objectID": "6A60671B-6A61-50E0-151E-CF57441CEA38",
-      "x": 7.5,
-      "y": 339.0,
-      "z": 7.180000305175781
+      "objectID": "23524C10-57E6-0FD0-1619-6414871EAC07",
+      "x": -558.477783203125,
+      "y": -515.3374633789063,
+      "z": 41.66191101074219
+    },
+    {
+      "activeDrawerID": "BFC43774-23B5-4692-82C3-00A09EC72114",
+      "classID": "63C90FA8-D7AF-41E2-9566-15DBD704A00E",
+      "collapsed": true,
+      "drawers": [
+        {
+          "classID": "BFC43774-23B5-4692-82C3-00A09EC72114",
+          "name": "map"
+        },
+        {
+          "autoScale": false,
+          "classID": "A2BDB410-F257-4360-8615-B821BE548FBD",
+          "drawInfo": true,
+          "lineWidth": 1.5,
+          "name": "lines (x=t)",
+          "offset": 0.0,
+          "scale": 1.0
+        },
+        {
+          "autoScale": false,
+          "bufferSize": 64,
+          "classID": "DD1010AE-A63C-4736-906A-E7FF4C8DCAEB",
+          "drawInfo": true,
+          "lineWidth": 1.5,
+          "name": "lines (hist)",
+          "offset": 0.0,
+          "scale": 1.0
+        },
+        {
+          "bufferSize": 64,
+          "classID": "723FA6EE-CB10-4ED5-848C-1F75672ED1F1",
+          "name": "map (hist)"
+        }
+      ],
+      "objectID": "6E4B6917-5857-13E6-1400-2E7B6336E87C",
+      "x": -238.045654296875,
+      "y": -752.7261962890625,
+      "z": 4.151999473571777
+    },
+    {
+      "activeDrawerID": "BFC43774-23B5-4692-82C3-00A09EC72114",
+      "classID": "63C90FA8-D7AF-41E2-9566-15DBD704A00E",
+      "collapsed": true,
+      "drawers": [
+        {
+          "classID": "BFC43774-23B5-4692-82C3-00A09EC72114",
+          "name": "map"
+        },
+        {
+          "autoScale": false,
+          "classID": "A2BDB410-F257-4360-8615-B821BE548FBD",
+          "drawInfo": true,
+          "lineWidth": 1.5,
+          "name": "lines (x=t)",
+          "offset": 0.0,
+          "scale": 1.0
+        },
+        {
+          "autoScale": false,
+          "bufferSize": 64,
+          "classID": "DD1010AE-A63C-4736-906A-E7FF4C8DCAEB",
+          "drawInfo": true,
+          "lineWidth": 1.5,
+          "name": "lines (hist)",
+          "offset": 0.0,
+          "scale": 1.0
+        },
+        {
+          "bufferSize": 64,
+          "classID": "723FA6EE-CB10-4ED5-848C-1F75672ED1F1",
+          "name": "map (hist)"
+        }
+      ],
+      "objectID": "799B4824-277D-13B1-7777-2D75665A6043",
+      "x": 863.0380859375,
+      "y": -900.3845825195313,
+      "z": 8.328001976013184
     },
     {
       "activeDrawerID": "DD1010AE-A63C-4736-906A-E7FF4C8DCAEB",
+      "classID": "96C3549D-69BE-4F8B-B83A-A2923DB8D09F",
+      "collapsed": false,
+      "drawers": [
+        {
+          "classID": "BFC43774-23B5-4692-82C3-00A09EC72114",
+          "name": "map"
+        },
+        {
+          "autoScale": false,
+          "classID": "A2BDB410-F257-4360-8615-B821BE548FBD",
+          "drawInfo": true,
+          "lineWidth": 1.5,
+          "name": "lines (x=t)",
+          "offset": 0.0,
+          "scale": 1.0
+        },
+        {
+          "autoScale": false,
+          "bufferSize": 64,
+          "classID": "DD1010AE-A63C-4736-906A-E7FF4C8DCAEB",
+          "drawInfo": true,
+          "lineWidth": 1.5,
+          "name": "lines (hist)",
+          "offset": 0.0,
+          "scale": 1.0
+        },
+        {
+          "bufferSize": 64,
+          "classID": "723FA6EE-CB10-4ED5-848C-1F75672ED1F1",
+          "name": "map (hist)"
+        }
+      ],
+      "objectID": "52E97624-395B-6DB9-B33F-F7494502FD0C",
+      "x": -342.7373962402344,
+      "y": -1049.91845703125,
+      "z": 21.82601547241211
+    },
+    {
+      "activeDrawerID": "BFC43774-23B5-4692-82C3-00A09EC72114",
+      "classID": "F5057C23-768F-49B3-B9D5-12CC7DC6D3F2",
+      "collapsed": true,
+      "drawers": [
+        {
+          "classID": "BFC43774-23B5-4692-82C3-00A09EC72114",
+          "name": "map"
+        },
+        {
+          "autoScale": false,
+          "classID": "A2BDB410-F257-4360-8615-B821BE548FBD",
+          "drawInfo": true,
+          "lineWidth": 1.5,
+          "name": "lines (x=t)",
+          "offset": 0.0,
+          "scale": 1.0
+        },
+        {
+          "autoScale": false,
+          "bufferSize": 64,
+          "classID": "DD1010AE-A63C-4736-906A-E7FF4C8DCAEB",
+          "drawInfo": true,
+          "lineWidth": 1.5,
+          "name": "lines (hist)",
+          "offset": 0.0,
+          "scale": 1.0
+        },
+        {
+          "bufferSize": 64,
+          "classID": "723FA6EE-CB10-4ED5-848C-1F75672ED1F1",
+          "name": "map (hist)"
+        }
+      ],
+      "objectID": "68E1252A-67D9-0489-E039-162F74294B1F",
+      "x": 492.769287109375,
+      "y": 122.82049560546875,
+      "z": 12.534012794494629
+    },
+    {
+      "activeDrawerID": "DD1010AE-A63C-4736-906A-E7FF4C8DCAEB",
+      "classID": "CD38C649-5E8B-4EFE-9EDF-10F7B96879DD",
+      "collapsed": false,
+      "drawers": [
+        {
+          "classID": "BFC43774-23B5-4692-82C3-00A09EC72114",
+          "name": "map"
+        },
+        {
+          "autoScale": false,
+          "classID": "A2BDB410-F257-4360-8615-B821BE548FBD",
+          "drawInfo": true,
+          "lineWidth": 1.5,
+          "name": "lines (x=t)",
+          "offset": 0.0,
+          "scale": 1.0
+        },
+        {
+          "autoScale": false,
+          "bufferSize": 64,
+          "classID": "DD1010AE-A63C-4736-906A-E7FF4C8DCAEB",
+          "drawInfo": true,
+          "lineWidth": 1.5,
+          "name": "lines (hist)",
+          "offset": 0.0,
+          "scale": 1.0
+        },
+        {
+          "bufferSize": 64,
+          "classID": "723FA6EE-CB10-4ED5-848C-1F75672ED1F1",
+          "name": "map (hist)"
+        }
+      ],
+      "objectID": "0AE25E2A-0DD3-15A3-7E08-7A1C92381343",
+      "x": -941.2710571289063,
+      "y": -50.073822021484375,
+      "z": 48.95585250854492
+    },
+    {
+      "activeDrawerID": "BFC43774-23B5-4692-82C3-00A09EC72114",
+      "classID": "177C4CCC-5D3D-4B6A-AF57-B343F1AB7D6E",
+      "collapsed": true,
+      "drawers": [
+        {
+          "classID": "BFC43774-23B5-4692-82C3-00A09EC72114",
+          "name": "map"
+        },
+        {
+          "autoScale": false,
+          "classID": "A2BDB410-F257-4360-8615-B821BE548FBD",
+          "drawInfo": true,
+          "lineWidth": 1.5,
+          "name": "lines (x=t)",
+          "offset": 0.0,
+          "scale": 1.0
+        },
+        {
+          "autoScale": false,
+          "bufferSize": 64,
+          "classID": "DD1010AE-A63C-4736-906A-E7FF4C8DCAEB",
+          "drawInfo": true,
+          "lineWidth": 1.5,
+          "name": "lines (hist)",
+          "offset": 0.0,
+          "scale": 1.0
+        },
+        {
+          "bufferSize": 64,
+          "classID": "723FA6EE-CB10-4ED5-848C-1F75672ED1F1",
+          "name": "map (hist)"
+        }
+      ],
+      "objectID": "40EE713B-4A42-7FA9-3B7B-6245C53FC257",
+      "x": -1359.2276611328125,
+      "y": -602.33740234375,
+      "z": 30.118003845214844
+    },
+    {
+      "activeDrawerID": "BFC43774-23B5-4692-82C3-00A09EC72114",
+      "classID": "63C90FA8-D7AF-41E2-9566-15DBD704A00E",
+      "collapsed": true,
+      "drawers": [
+        {
+          "classID": "BFC43774-23B5-4692-82C3-00A09EC72114",
+          "name": "map"
+        },
+        {
+          "autoScale": false,
+          "classID": "A2BDB410-F257-4360-8615-B821BE548FBD",
+          "drawInfo": true,
+          "lineWidth": 1.5,
+          "name": "lines (x=t)",
+          "offset": 0.0,
+          "scale": 1.0
+        },
+        {
+          "autoScale": false,
+          "bufferSize": 64,
+          "classID": "DD1010AE-A63C-4736-906A-E7FF4C8DCAEB",
+          "drawInfo": true,
+          "lineWidth": 1.5,
+          "name": "lines (hist)",
+          "offset": 0.0,
+          "scale": 1.0
+        },
+        {
+          "bufferSize": 64,
+          "classID": "723FA6EE-CB10-4ED5-848C-1F75672ED1F1",
+          "name": "map (hist)"
+        }
+      ],
+      "objectID": "09CD7246-6493-0725-F101-7A38C6741962",
+      "x": 764.4276733398438,
+      "y": 340.3903503417969,
+      "z": 2.0340001583099365
+    },
+    {
+      "activeDrawerID": "BFC43774-23B5-4692-82C3-00A09EC72114",
+      "classID": "177C4CCC-5D3D-4B6A-AF57-B343F1AB7D6E",
+      "collapsed": true,
+      "drawers": [
+        {
+          "classID": "BFC43774-23B5-4692-82C3-00A09EC72114",
+          "name": "map"
+        },
+        {
+          "autoScale": false,
+          "classID": "A2BDB410-F257-4360-8615-B821BE548FBD",
+          "drawInfo": true,
+          "lineWidth": 1.5,
+          "name": "lines (x=t)",
+          "offset": 0.0,
+          "scale": 1.0
+        },
+        {
+          "autoScale": false,
+          "bufferSize": 64,
+          "classID": "DD1010AE-A63C-4736-906A-E7FF4C8DCAEB",
+          "drawInfo": true,
+          "lineWidth": 1.5,
+          "name": "lines (hist)",
+          "offset": 0.0,
+          "scale": 1.0
+        },
+        {
+          "bufferSize": 64,
+          "classID": "723FA6EE-CB10-4ED5-848C-1F75672ED1F1",
+          "name": "map (hist)"
+        }
+      ],
+      "objectID": "3B65054B-3F64-592D-7610-E53A26706202",
+      "x": -823.727783203125,
+      "y": -598.33740234375,
+      "z": 31.162002563476563
+    },
+    {
+      "activeDrawerID": "DD1010AE-A63C-4736-906A-E7FF4C8DCAEB",
+      "classID": "96C3549D-69BE-4F8B-B83A-A2923DB8D09F",
+      "collapsed": false,
+      "drawers": [
+        {
+          "classID": "BFC43774-23B5-4692-82C3-00A09EC72114",
+          "name": "map"
+        },
+        {
+          "autoScale": false,
+          "classID": "A2BDB410-F257-4360-8615-B821BE548FBD",
+          "drawInfo": true,
+          "lineWidth": 1.5,
+          "name": "lines (x=t)",
+          "offset": 0.0,
+          "scale": 1.0
+        },
+        {
+          "autoScale": false,
+          "bufferSize": 64,
+          "classID": "DD1010AE-A63C-4736-906A-E7FF4C8DCAEB",
+          "drawInfo": true,
+          "lineWidth": 1.5,
+          "name": "lines (hist)",
+          "offset": 0.0,
+          "scale": 1.0
+        },
+        {
+          "bufferSize": 64,
+          "classID": "723FA6EE-CB10-4ED5-848C-1F75672ED1F1",
+          "name": "map (hist)"
+        }
+      ],
+      "objectID": "6AD84651-44FE-4A0B-5600-4F4D4816616D",
+      "x": 181.644775390625,
+      "y": -1042.169189453125,
+      "z": 18.72402000427246
+    },
+    {
+      "activeDrawerID": "BFC43774-23B5-4692-82C3-00A09EC72114",
+      "classID": "6637087B-12A4-486B-8052-4948EB98EF19",
+      "collapsed": true,
+      "drawers": [
+        {
+          "classID": "BFC43774-23B5-4692-82C3-00A09EC72114",
+          "name": "map"
+        },
+        {
+          "autoScale": false,
+          "classID": "A2BDB410-F257-4360-8615-B821BE548FBD",
+          "drawInfo": true,
+          "lineWidth": 1.5,
+          "name": "lines (x=t)",
+          "offset": 0.0,
+          "scale": 1.0
+        },
+        {
+          "autoScale": false,
+          "bufferSize": 64,
+          "classID": "DD1010AE-A63C-4736-906A-E7FF4C8DCAEB",
+          "drawInfo": true,
+          "lineWidth": 1.5,
+          "name": "lines (hist)",
+          "offset": 0.0,
+          "scale": 1.0
+        },
+        {
+          "bufferSize": 64,
+          "classID": "723FA6EE-CB10-4ED5-848C-1F75672ED1F1",
+          "name": "map (hist)"
+        }
+      ],
+      "objectID": "23D17551-7947-7C39-D536-5A14AF0C3606",
+      "x": 1000.26513671875,
+      "y": -398.746337890625,
+      "z": 3.0879998207092285
+    },
+    {
+      "activeDrawerID": "BFC43774-23B5-4692-82C3-00A09EC72114",
       "classID": "96C3549D-69BE-4F8B-B83A-A2923DB8D09F",
       "collapsed": true,
       "drawers": [
@@ -198,14 +516,131 @@
           "name": "map (hist)"
         }
       ],
-      "objectID": "52E97624-395B-6DB9-B33F-F7494502FD0C",
-      "x": -9.0,
-      "y": -50.5,
-      "z": 12.40001106262207
+      "objectID": "40FE6954-5C7C-2F3F-2E61-ED3E7D34162B",
+      "x": -824.727783203125,
+      "y": -677.33740234375,
+      "z": 37.475948333740234
+    },
+    {
+      "activeDrawerID": "DD1010AE-A63C-4736-906A-E7FF4C8DCAEB",
+      "classID": "63C90FA8-D7AF-41E2-9566-15DBD704A00E",
+      "collapsed": false,
+      "drawers": [
+        {
+          "classID": "BFC43774-23B5-4692-82C3-00A09EC72114",
+          "name": "map"
+        },
+        {
+          "autoScale": false,
+          "classID": "A2BDB410-F257-4360-8615-B821BE548FBD",
+          "drawInfo": true,
+          "lineWidth": 1.5,
+          "name": "lines (x=t)",
+          "offset": 0.0,
+          "scale": 1.0
+        },
+        {
+          "autoScale": false,
+          "bufferSize": 64,
+          "classID": "DD1010AE-A63C-4736-906A-E7FF4C8DCAEB",
+          "drawInfo": true,
+          "lineWidth": 1.5,
+          "name": "lines (hist)",
+          "offset": -0.800000011920929,
+          "scale": 1.600000023841858
+        },
+        {
+          "bufferSize": 64,
+          "classID": "723FA6EE-CB10-4ED5-848C-1F75672ED1F1",
+          "name": "map (hist)"
+        }
+      ],
+      "objectID": "53726457-3ED2-4ECD-F773-D76210220B0C",
+      "x": 1001.2454833984375,
+      "y": -318.0396728515625,
+      "z": 11.480010032653809
     },
     {
       "activeDrawerID": "BFC43774-23B5-4692-82C3-00A09EC72114",
-      "classID": "F5057C23-768F-49B3-B9D5-12CC7DC6D3F2",
+      "classID": "96C3549D-69BE-4F8B-B83A-A2923DB8D09F",
+      "collapsed": true,
+      "drawers": [
+        {
+          "classID": "BFC43774-23B5-4692-82C3-00A09EC72114",
+          "name": "map"
+        },
+        {
+          "autoScale": false,
+          "classID": "A2BDB410-F257-4360-8615-B821BE548FBD",
+          "drawInfo": true,
+          "lineWidth": 1.5,
+          "name": "lines (x=t)",
+          "offset": 0.0,
+          "scale": 1.0
+        },
+        {
+          "autoScale": false,
+          "bufferSize": 64,
+          "classID": "DD1010AE-A63C-4736-906A-E7FF4C8DCAEB",
+          "drawInfo": true,
+          "lineWidth": 1.5,
+          "name": "lines (hist)",
+          "offset": 0.0,
+          "scale": 1.0
+        },
+        {
+          "bufferSize": 64,
+          "classID": "723FA6EE-CB10-4ED5-848C-1F75672ED1F1",
+          "name": "map (hist)"
+        }
+      ],
+      "objectID": "0DAF7F5A-3D27-6006-8461-E7649730A943",
+      "x": 719.3341064453125,
+      "y": -1038.805419921875,
+      "z": 6.2400007247924805
+    },
+    {
+      "activeDrawerID": "BFC43774-23B5-4692-82C3-00A09EC72114",
+      "classID": "6637087B-12A4-486B-8052-4948EB98EF19",
+      "collapsed": true,
+      "drawers": [
+        {
+          "classID": "BFC43774-23B5-4692-82C3-00A09EC72114",
+          "name": "map"
+        },
+        {
+          "autoScale": false,
+          "classID": "A2BDB410-F257-4360-8615-B821BE548FBD",
+          "drawInfo": true,
+          "lineWidth": 1.5,
+          "name": "lines (x=t)",
+          "offset": 0.0,
+          "scale": 1.0
+        },
+        {
+          "autoScale": false,
+          "bufferSize": 64,
+          "classID": "DD1010AE-A63C-4736-906A-E7FF4C8DCAEB",
+          "drawInfo": true,
+          "lineWidth": 1.5,
+          "name": "lines (hist)",
+          "offset": 0.0,
+          "scale": 1.0
+        },
+        {
+          "bufferSize": 64,
+          "classID": "723FA6EE-CB10-4ED5-848C-1F75672ED1F1",
+          "name": "map (hist)"
+        }
+      ],
+      "objectID": "3A9E0E5C-7375-24C7-3A7F-D85E8E046E51",
+      "x": -1095.9776611328125,
+      "y": -522.5874633789063,
+      "z": 33.269989013671875
+    },
+    {
+      "activeDrawerID": "DD1010AE-A63C-4736-906A-E7FF4C8DCAEB",
+      "classID": "96C3549D-69BE-4F8B-B83A-A2923DB8D09F",
       "collapsed": false,
       "drawers": [
         {
@@ -237,10 +672,127 @@
           "name": "map (hist)"
         }
       ],
-      "objectID": "68E1252A-67D9-0489-E039-162F74294B1F",
-      "x": 338.5,
-      "y": -17.0,
-      "z": 1.0
+      "objectID": "539F035D-7265-3420-B76E-CF716379BF73",
+      "x": -90.98678588867188,
+      "y": -1049.66162109375,
+      "z": 19.758018493652344
+    },
+    {
+      "activeDrawerID": "BFC43774-23B5-4692-82C3-00A09EC72114",
+      "classID": "177C4CCC-5D3D-4B6A-AF57-B343F1AB7D6E",
+      "collapsed": true,
+      "drawers": [
+        {
+          "classID": "BFC43774-23B5-4692-82C3-00A09EC72114",
+          "name": "map"
+        },
+        {
+          "autoScale": false,
+          "classID": "A2BDB410-F257-4360-8615-B821BE548FBD",
+          "drawInfo": true,
+          "lineWidth": 1.5,
+          "name": "lines (x=t)",
+          "offset": 0.0,
+          "scale": 1.0
+        },
+        {
+          "autoScale": false,
+          "bufferSize": 64,
+          "classID": "DD1010AE-A63C-4736-906A-E7FF4C8DCAEB",
+          "drawInfo": true,
+          "lineWidth": 1.5,
+          "name": "lines (hist)",
+          "offset": 0.0,
+          "scale": 1.0
+        },
+        {
+          "bufferSize": 64,
+          "classID": "723FA6EE-CB10-4ED5-848C-1F75672ED1F1",
+          "name": "map (hist)"
+        }
+      ],
+      "objectID": "286A7662-32FC-5BF6-E946-9A545A7F4D05",
+      "x": -561.727783203125,
+      "y": -597.33740234375,
+      "z": 38.50994110107422
+    },
+    {
+      "activeDrawerID": "BFC43774-23B5-4692-82C3-00A09EC72114",
+      "classID": "4FD4F399-4542-4B80-8A21-B31C49DA3F09",
+      "collapsed": false,
+      "drawers": [
+        {
+          "classID": "BFC43774-23B5-4692-82C3-00A09EC72114",
+          "name": "map"
+        },
+        {
+          "autoScale": false,
+          "classID": "A2BDB410-F257-4360-8615-B821BE548FBD",
+          "drawInfo": true,
+          "lineWidth": 1.5,
+          "name": "lines (x=t)",
+          "offset": 0.0,
+          "scale": 1.0
+        },
+        {
+          "autoScale": false,
+          "bufferSize": 64,
+          "classID": "DD1010AE-A63C-4736-906A-E7FF4C8DCAEB",
+          "drawInfo": true,
+          "lineWidth": 1.5,
+          "name": "lines (hist)",
+          "offset": 0.0,
+          "scale": 1.0
+        },
+        {
+          "bufferSize": 64,
+          "classID": "723FA6EE-CB10-4ED5-848C-1F75672ED1F1",
+          "name": "map (hist)"
+        }
+      ],
+      "objectID": "46711563-2A05-3CC1-1027-CD2F0771B243",
+      "x": 249.35293579101563,
+      "y": -490.7763366699219,
+      "z": 43.72589874267578
+    },
+    {
+      "activeDrawerID": "BFC43774-23B5-4692-82C3-00A09EC72114",
+      "classID": "F11EFB21-3C05-47BF-8DC3-A3AAA6C87B5A",
+      "collapsed": true,
+      "drawers": [
+        {
+          "classID": "BFC43774-23B5-4692-82C3-00A09EC72114",
+          "name": "map"
+        },
+        {
+          "autoScale": false,
+          "classID": "A2BDB410-F257-4360-8615-B821BE548FBD",
+          "drawInfo": true,
+          "lineWidth": 1.5,
+          "name": "lines (x=t)",
+          "offset": 0.0,
+          "scale": 1.0
+        },
+        {
+          "autoScale": false,
+          "bufferSize": 64,
+          "classID": "DD1010AE-A63C-4736-906A-E7FF4C8DCAEB",
+          "drawInfo": true,
+          "lineWidth": 1.5,
+          "name": "lines (hist)",
+          "offset": 0.0,
+          "scale": 1.0
+        },
+        {
+          "bufferSize": 64,
+          "classID": "723FA6EE-CB10-4ED5-848C-1F75672ED1F1",
+          "name": "map (hist)"
+        }
+      ],
+      "objectID": "765E1266-3951-35D4-647A-D71FC6311622",
+      "x": -285.88629150390625,
+      "y": -25.458465576171875,
+      "z": 45.82387924194336
     },
     {
       "activeDrawerID": "DD1010AE-A63C-4736-906A-E7FF4C8DCAEB",
@@ -277,9 +829,165 @@
         }
       ],
       "objectID": "4C116369-4E04-6657-070D-6B2B96340159",
-      "x": 488.5,
-      "y": 426.5,
-      "z": 2.0340001583099365
+      "x": 126.96151733398438,
+      "y": 252.65386962890625,
+      "z": 15.636019706726074
+    },
+    {
+      "activeDrawerID": "BFC43774-23B5-4692-82C3-00A09EC72114",
+      "classID": "63C90FA8-D7AF-41E2-9566-15DBD704A00E",
+      "collapsed": true,
+      "drawers": [
+        {
+          "classID": "BFC43774-23B5-4692-82C3-00A09EC72114",
+          "name": "map"
+        },
+        {
+          "autoScale": false,
+          "classID": "A2BDB410-F257-4360-8615-B821BE548FBD",
+          "drawInfo": true,
+          "lineWidth": 1.5,
+          "name": "lines (x=t)",
+          "offset": 0.0,
+          "scale": 1.0
+        },
+        {
+          "autoScale": false,
+          "bufferSize": 64,
+          "classID": "DD1010AE-A63C-4736-906A-E7FF4C8DCAEB",
+          "drawInfo": true,
+          "lineWidth": 1.5,
+          "name": "lines (hist)",
+          "offset": 0.0,
+          "scale": 1.0
+        },
+        {
+          "bufferSize": 64,
+          "classID": "723FA6EE-CB10-4ED5-848C-1F75672ED1F1",
+          "name": "map (hist)"
+        }
+      ],
+      "objectID": "43656372-2F84-21F4-3256-FD467C7B0C7B",
+      "x": 239.88014221191406,
+      "y": -577.2265625,
+      "z": 9.382004737854004
+    },
+    {
+      "activeDrawerID": "723FA6EE-CB10-4ED5-848C-1F75672ED1F1",
+      "classID": "B138EDCC-9669-489C-8C43-4B7B16E0E500",
+      "collapsed": false,
+      "drawers": [
+        {
+          "classID": "BFC43774-23B5-4692-82C3-00A09EC72114",
+          "name": "map"
+        },
+        {
+          "autoScale": false,
+          "classID": "A2BDB410-F257-4360-8615-B821BE548FBD",
+          "drawInfo": true,
+          "lineWidth": 1.5,
+          "name": "lines (x=t)",
+          "offset": 0.0,
+          "scale": 1.0
+        },
+        {
+          "autoScale": false,
+          "bufferSize": 64,
+          "classID": "DD1010AE-A63C-4736-906A-E7FF4C8DCAEB",
+          "drawInfo": true,
+          "lineWidth": 1.5,
+          "name": "lines (hist)",
+          "offset": 0.0,
+          "scale": 1.0
+        },
+        {
+          "bufferSize": 64,
+          "classID": "723FA6EE-CB10-4ED5-848C-1F75672ED1F1",
+          "name": "map (hist)"
+        }
+      ],
+      "objectID": "4D305979-6DB9-3702-AC40-9100EA41B273",
+      "x": -627.4248046875,
+      "y": -40.843109130859375,
+      "z": 46.86787033081055
+    },
+    {
+      "activeDrawerID": "BFC43774-23B5-4692-82C3-00A09EC72114",
+      "classID": "96C3549D-69BE-4F8B-B83A-A2923DB8D09F",
+      "collapsed": true,
+      "drawers": [
+        {
+          "classID": "BFC43774-23B5-4692-82C3-00A09EC72114",
+          "name": "map"
+        },
+        {
+          "autoScale": false,
+          "classID": "A2BDB410-F257-4360-8615-B821BE548FBD",
+          "drawInfo": true,
+          "lineWidth": 1.5,
+          "name": "lines (x=t)",
+          "offset": 0.0,
+          "scale": 1.0
+        },
+        {
+          "autoScale": false,
+          "bufferSize": 64,
+          "classID": "DD1010AE-A63C-4736-906A-E7FF4C8DCAEB",
+          "drawInfo": true,
+          "lineWidth": 1.5,
+          "name": "lines (hist)",
+          "offset": 0.0,
+          "scale": 1.0
+        },
+        {
+          "bufferSize": 64,
+          "classID": "723FA6EE-CB10-4ED5-848C-1F75672ED1F1",
+          "name": "map (hist)"
+        }
+      ],
+      "objectID": "297A0E7C-1A2D-13BF-FA51-A92CEB59EA61",
+      "x": -1095.7276611328125,
+      "y": -678.33740234375,
+      "z": 35.39796447753906
+    },
+    {
+      "activeDrawerID": "BFC43774-23B5-4692-82C3-00A09EC72114",
+      "classID": "139329CA-6889-463E-914A-9048B8B5E155",
+      "collapsed": true,
+      "drawers": [
+        {
+          "classID": "BFC43774-23B5-4692-82C3-00A09EC72114",
+          "name": "map"
+        },
+        {
+          "autoScale": false,
+          "classID": "A2BDB410-F257-4360-8615-B821BE548FBD",
+          "drawInfo": true,
+          "lineWidth": 1.5,
+          "name": "lines (x=t)",
+          "offset": 0.0,
+          "scale": 1.0
+        },
+        {
+          "autoScale": false,
+          "bufferSize": 64,
+          "classID": "DD1010AE-A63C-4736-906A-E7FF4C8DCAEB",
+          "drawInfo": true,
+          "lineWidth": 1.5,
+          "name": "lines (hist)",
+          "offset": 0.0,
+          "scale": 1.0
+        },
+        {
+          "bufferSize": 64,
+          "classID": "723FA6EE-CB10-4ED5-848C-1F75672ED1F1",
+          "name": "map (hist)"
+        }
+      ],
+      "objectID": "48620282-080B-37E5-C633-04561C450B70",
+      "x": -1229.6029052734375,
+      "y": -415.95098876953125,
+      "z": 40.6079216003418
     },
     {
       "activeDrawerID": "DD1010AE-A63C-4736-906A-E7FF4C8DCAEB",
@@ -306,8 +1014,8 @@
           "drawInfo": true,
           "lineWidth": 1.5,
           "name": "lines (hist)",
-          "offset": -1.0,
-          "scale": 1.0
+          "offset": -0.800000011920929,
+          "scale": 1.600000023841858
         },
         {
           "bufferSize": 64,
@@ -316,14 +1024,14 @@
         }
       ],
       "objectID": "79290489-4BBA-7AE7-3210-8A61C90C6374",
-      "x": 203.5,
-      "y": 716.0,
-      "z": 10.322006225585938
+      "x": 691.5732421875,
+      "y": -511.34124755859375,
+      "z": 10.436007499694824
     },
     {
       "activeDrawerID": "BFC43774-23B5-4692-82C3-00A09EC72114",
-      "classID": "0C1DCBB7-9CFB-4716-9FB3-94C733A0538F",
-      "collapsed": false,
+      "classID": "177C4CCC-5D3D-4B6A-AF57-B343F1AB7D6E",
+      "collapsed": true,
       "drawers": [
         {
           "classID": "BFC43774-23B5-4692-82C3-00A09EC72114",
@@ -354,10 +1062,439 @@
           "name": "map (hist)"
         }
       ],
-      "objectID": "2575359D-7146-4FFD-C870-410D375A666F",
-      "x": 863.8839111328125,
-      "y": 636.36865234375,
-      "z": 8.224000930786133
+      "objectID": "76FC038A-4422-14EC-C92D-B165F009007F",
+      "x": -1094.7276611328125,
+      "y": -599.33740234375,
+      "z": 36.43195724487305
+    },
+    {
+      "activeDrawerID": "BFC43774-23B5-4692-82C3-00A09EC72114",
+      "classID": "40DE5B8D-4FCF-4A69-A65C-EBCC94D86034",
+      "collapsed": true,
+      "drawers": [
+        {
+          "classID": "BFC43774-23B5-4692-82C3-00A09EC72114",
+          "name": "map"
+        },
+        {
+          "autoScale": false,
+          "classID": "A2BDB410-F257-4360-8615-B821BE548FBD",
+          "drawInfo": true,
+          "lineWidth": 1.5,
+          "name": "lines (x=t)",
+          "offset": 0.0,
+          "scale": 1.0
+        },
+        {
+          "autoScale": false,
+          "bufferSize": 64,
+          "classID": "DD1010AE-A63C-4736-906A-E7FF4C8DCAEB",
+          "drawInfo": true,
+          "lineWidth": 1.5,
+          "name": "lines (hist)",
+          "offset": 0.0,
+          "scale": 1.0
+        },
+        {
+          "bufferSize": 64,
+          "classID": "723FA6EE-CB10-4ED5-848C-1F75672ED1F1",
+          "name": "map (hist)"
+        }
+      ],
+      "objectID": "211C7A97-3A6E-6C83-112E-322CE24A483F",
+      "x": -1095.2276611328125,
+      "y": -988.8375854492188,
+      "z": 24.94801139831543
+    },
+    {
+      "activeDrawerID": "BFC43774-23B5-4692-82C3-00A09EC72114",
+      "classID": "6637087B-12A4-486B-8052-4948EB98EF19",
+      "collapsed": true,
+      "drawers": [
+        {
+          "classID": "BFC43774-23B5-4692-82C3-00A09EC72114",
+          "name": "map"
+        },
+        {
+          "autoScale": false,
+          "classID": "A2BDB410-F257-4360-8615-B821BE548FBD",
+          "drawInfo": true,
+          "lineWidth": 1.5,
+          "name": "lines (x=t)",
+          "offset": 0.0,
+          "scale": 1.0
+        },
+        {
+          "autoScale": false,
+          "bufferSize": 64,
+          "classID": "DD1010AE-A63C-4736-906A-E7FF4C8DCAEB",
+          "drawInfo": true,
+          "lineWidth": 1.5,
+          "name": "lines (hist)",
+          "offset": 0.0,
+          "scale": 1.0
+        },
+        {
+          "bufferSize": 64,
+          "classID": "723FA6EE-CB10-4ED5-848C-1F75672ED1F1",
+          "name": "map (hist)"
+        }
+      ],
+      "objectID": "164306A0-6AB7-19F3-6B22-A93267007769",
+      "x": -1359.9776611328125,
+      "y": -521.3374633789063,
+      "z": 32.20600128173828
+    },
+    {
+      "activeDrawerID": "BFC43774-23B5-4692-82C3-00A09EC72114",
+      "classID": "40DE5B8D-4FCF-4A69-A65C-EBCC94D86034",
+      "collapsed": true,
+      "drawers": [
+        {
+          "classID": "BFC43774-23B5-4692-82C3-00A09EC72114",
+          "name": "map"
+        },
+        {
+          "autoScale": false,
+          "classID": "A2BDB410-F257-4360-8615-B821BE548FBD",
+          "drawInfo": true,
+          "lineWidth": 1.5,
+          "name": "lines (x=t)",
+          "offset": 0.0,
+          "scale": 1.0
+        },
+        {
+          "autoScale": false,
+          "bufferSize": 64,
+          "classID": "DD1010AE-A63C-4736-906A-E7FF4C8DCAEB",
+          "drawInfo": true,
+          "lineWidth": 1.5,
+          "name": "lines (hist)",
+          "offset": 0.0,
+          "scale": 1.0
+        },
+        {
+          "bufferSize": 64,
+          "classID": "723FA6EE-CB10-4ED5-848C-1F75672ED1F1",
+          "name": "map (hist)"
+        }
+      ],
+      "objectID": "7A112BA0-42E0-12BD-3810-C24CA1434237",
+      "x": -1094.2276611328125,
+      "y": -913.3373413085938,
+      "z": 23.914012908935547
+    },
+    {
+      "activeDrawerID": "BFC43774-23B5-4692-82C3-00A09EC72114",
+      "classID": "63C90FA8-D7AF-41E2-9566-15DBD704A00E",
+      "collapsed": true,
+      "drawers": [
+        {
+          "classID": "BFC43774-23B5-4692-82C3-00A09EC72114",
+          "name": "map"
+        },
+        {
+          "autoScale": false,
+          "classID": "A2BDB410-F257-4360-8615-B821BE548FBD",
+          "drawInfo": true,
+          "lineWidth": 1.5,
+          "name": "lines (x=t)",
+          "offset": 0.0,
+          "scale": 1.0
+        },
+        {
+          "autoScale": false,
+          "bufferSize": 64,
+          "classID": "DD1010AE-A63C-4736-906A-E7FF4C8DCAEB",
+          "drawInfo": true,
+          "lineWidth": 1.5,
+          "name": "lines (hist)",
+          "offset": 0.0,
+          "scale": 1.0
+        },
+        {
+          "bufferSize": 64,
+          "classID": "723FA6EE-CB10-4ED5-848C-1F75672ED1F1",
+          "name": "map (hist)"
+        }
+      ],
+      "objectID": "003B62A3-47CB-72C2-DC04-BC0DFF0C3E7B",
+      "x": 67.836669921875,
+      "y": -669.7850341796875,
+      "z": 22.860013961791992
+    },
+    {
+      "activeDrawerID": "BFC43774-23B5-4692-82C3-00A09EC72114",
+      "classID": "40DE5B8D-4FCF-4A69-A65C-EBCC94D86034",
+      "collapsed": true,
+      "drawers": [
+        {
+          "classID": "BFC43774-23B5-4692-82C3-00A09EC72114",
+          "name": "map"
+        },
+        {
+          "autoScale": false,
+          "classID": "A2BDB410-F257-4360-8615-B821BE548FBD",
+          "drawInfo": true,
+          "lineWidth": 1.5,
+          "name": "lines (x=t)",
+          "offset": 0.0,
+          "scale": 1.0
+        },
+        {
+          "autoScale": false,
+          "bufferSize": 64,
+          "classID": "DD1010AE-A63C-4736-906A-E7FF4C8DCAEB",
+          "drawInfo": true,
+          "lineWidth": 1.5,
+          "name": "lines (hist)",
+          "offset": 0.0,
+          "scale": 1.0
+        },
+        {
+          "bufferSize": 64,
+          "classID": "723FA6EE-CB10-4ED5-848C-1F75672ED1F1",
+          "name": "map (hist)"
+        }
+      ],
+      "objectID": "091A5DA4-4788-0C7B-DB34-442EE3212441",
+      "x": -1095.2276611328125,
+      "y": -838.83740234375,
+      "z": 25.982009887695313
+    },
+    {
+      "activeDrawerID": "BFC43774-23B5-4692-82C3-00A09EC72114",
+      "classID": "0C74DDA6-3B5B-4DD2-9B5D-4340B9094E73",
+      "collapsed": true,
+      "drawers": [
+        {
+          "classID": "BFC43774-23B5-4692-82C3-00A09EC72114",
+          "name": "map"
+        },
+        {
+          "autoScale": false,
+          "classID": "A2BDB410-F257-4360-8615-B821BE548FBD",
+          "drawInfo": true,
+          "lineWidth": 1.5,
+          "name": "lines (x=t)",
+          "offset": 0.0,
+          "scale": 1.0
+        },
+        {
+          "autoScale": false,
+          "bufferSize": 64,
+          "classID": "DD1010AE-A63C-4736-906A-E7FF4C8DCAEB",
+          "drawInfo": true,
+          "lineWidth": 1.5,
+          "name": "lines (hist)",
+          "offset": 0.0,
+          "scale": 1.0
+        },
+        {
+          "bufferSize": 64,
+          "classID": "723FA6EE-CB10-4ED5-848C-1F75672ED1F1",
+          "name": "map (hist)"
+        }
+      ],
+      "objectID": "61DC2DA7-4C4F-54B0-940D-4431CD4D5749",
+      "x": 871.4780883789063,
+      "y": 441.6475830078125,
+      "z": 1.0
+    },
+    {
+      "activeDrawerID": "BFC43774-23B5-4692-82C3-00A09EC72114",
+      "classID": "6637087B-12A4-486B-8052-4948EB98EF19",
+      "collapsed": true,
+      "drawers": [
+        {
+          "classID": "BFC43774-23B5-4692-82C3-00A09EC72114",
+          "name": "map"
+        },
+        {
+          "autoScale": false,
+          "classID": "A2BDB410-F257-4360-8615-B821BE548FBD",
+          "drawInfo": true,
+          "lineWidth": 1.5,
+          "name": "lines (x=t)",
+          "offset": 0.0,
+          "scale": 1.0
+        },
+        {
+          "autoScale": false,
+          "bufferSize": 64,
+          "classID": "DD1010AE-A63C-4736-906A-E7FF4C8DCAEB",
+          "drawInfo": true,
+          "lineWidth": 1.5,
+          "name": "lines (hist)",
+          "offset": 0.0,
+          "scale": 1.0
+        },
+        {
+          "bufferSize": 64,
+          "classID": "723FA6EE-CB10-4ED5-848C-1F75672ED1F1",
+          "name": "map (hist)"
+        }
+      ],
+      "objectID": "19514DB7-7991-425A-5353-9D269501D87B",
+      "x": -824.977783203125,
+      "y": -517.8374633789063,
+      "z": 34.33397674560547
+    },
+    {
+      "activeDrawerID": "BFC43774-23B5-4692-82C3-00A09EC72114",
+      "classID": "96C3549D-69BE-4F8B-B83A-A2923DB8D09F",
+      "collapsed": true,
+      "drawers": [
+        {
+          "classID": "BFC43774-23B5-4692-82C3-00A09EC72114",
+          "name": "map"
+        },
+        {
+          "autoScale": false,
+          "classID": "A2BDB410-F257-4360-8615-B821BE548FBD",
+          "drawInfo": true,
+          "lineWidth": 1.5,
+          "name": "lines (x=t)",
+          "offset": 0.0,
+          "scale": 1.0
+        },
+        {
+          "autoScale": false,
+          "bufferSize": 64,
+          "classID": "DD1010AE-A63C-4736-906A-E7FF4C8DCAEB",
+          "drawInfo": true,
+          "lineWidth": 1.5,
+          "name": "lines (hist)",
+          "offset": 0.0,
+          "scale": 1.0
+        },
+        {
+          "bufferSize": 64,
+          "classID": "723FA6EE-CB10-4ED5-848C-1F75672ED1F1",
+          "name": "map (hist)"
+        }
+      ],
+      "objectID": "68AD51BF-5623-35B0-2823-926A4F08DA28",
+      "x": -1360.2276611328125,
+      "y": -681.33740234375,
+      "z": 28.050006866455078
+    },
+    {
+      "activeDrawerID": "BFC43774-23B5-4692-82C3-00A09EC72114",
+      "classID": "139329CA-6889-463E-914A-9048B8B5E155",
+      "collapsed": true,
+      "drawers": [
+        {
+          "classID": "BFC43774-23B5-4692-82C3-00A09EC72114",
+          "name": "map"
+        },
+        {
+          "autoScale": false,
+          "classID": "A2BDB410-F257-4360-8615-B821BE548FBD",
+          "drawInfo": true,
+          "lineWidth": 1.5,
+          "name": "lines (x=t)",
+          "offset": 0.0,
+          "scale": 1.0
+        },
+        {
+          "autoScale": false,
+          "bufferSize": 64,
+          "classID": "DD1010AE-A63C-4736-906A-E7FF4C8DCAEB",
+          "drawInfo": true,
+          "lineWidth": 1.5,
+          "name": "lines (hist)",
+          "offset": 0.0,
+          "scale": 1.0
+        },
+        {
+          "bufferSize": 64,
+          "classID": "723FA6EE-CB10-4ED5-848C-1F75672ED1F1",
+          "name": "map (hist)"
+        }
+      ],
+      "objectID": "430015C7-59EE-6005-0A39-4F48F3765D13",
+      "x": -995.0193481445313,
+      "y": -296.99267578125,
+      "z": 44.76988983154297
+    },
+    {
+      "activeDrawerID": "BFC43774-23B5-4692-82C3-00A09EC72114",
+      "classID": "139329CA-6889-463E-914A-9048B8B5E155",
+      "collapsed": true,
+      "drawers": [
+        {
+          "classID": "BFC43774-23B5-4692-82C3-00A09EC72114",
+          "name": "map"
+        },
+        {
+          "autoScale": false,
+          "classID": "A2BDB410-F257-4360-8615-B821BE548FBD",
+          "drawInfo": true,
+          "lineWidth": 1.5,
+          "name": "lines (x=t)",
+          "offset": 0.0,
+          "scale": 1.0
+        },
+        {
+          "autoScale": false,
+          "bufferSize": 64,
+          "classID": "DD1010AE-A63C-4736-906A-E7FF4C8DCAEB",
+          "drawInfo": true,
+          "lineWidth": 1.5,
+          "name": "lines (hist)",
+          "offset": 0.0,
+          "scale": 1.0
+        },
+        {
+          "bufferSize": 64,
+          "classID": "723FA6EE-CB10-4ED5-848C-1F75672ED1F1",
+          "name": "map (hist)"
+        }
+      ],
+      "objectID": "6E6F1BCD-4694-56B6-8F02-7A38C63F6C6E",
+      "x": -745.852783203125,
+      "y": -424.07598876953125,
+      "z": 39.553932189941406
+    },
+    {
+      "activeDrawerID": "BFC43774-23B5-4692-82C3-00A09EC72114",
+      "classID": "63C90FA8-D7AF-41E2-9566-15DBD704A00E",
+      "collapsed": true,
+      "drawers": [
+        {
+          "classID": "BFC43774-23B5-4692-82C3-00A09EC72114",
+          "name": "map"
+        },
+        {
+          "autoScale": false,
+          "classID": "A2BDB410-F257-4360-8615-B821BE548FBD",
+          "drawInfo": true,
+          "lineWidth": 1.5,
+          "name": "lines (x=t)",
+          "offset": 0.0,
+          "scale": 1.0
+        },
+        {
+          "autoScale": false,
+          "bufferSize": 64,
+          "classID": "DD1010AE-A63C-4736-906A-E7FF4C8DCAEB",
+          "drawInfo": true,
+          "lineWidth": 1.5,
+          "name": "lines (hist)",
+          "offset": 0.0,
+          "scale": 1.0
+        },
+        {
+          "bufferSize": 64,
+          "classID": "723FA6EE-CB10-4ED5-848C-1F75672ED1F1",
+          "name": "map (hist)"
+        }
+      ],
+      "objectID": "36AF07DB-399C-4748-D94C-991A7317452A",
+      "x": 309.0132141113281,
+      "y": -759.1968383789063,
+      "z": 7.274001121520996
     },
     {
       "activeDrawerID": "A2BDB410-F257-4360-8615-B821BE548FBD",
@@ -375,7 +1512,7 @@
           "lineWidth": 1.5,
           "name": "lines (x=t)",
           "offset": 0.0,
-          "scale": 0.25
+          "scale": 0.07999999821186066
         },
         {
           "autoScale": false,
@@ -394,14 +1531,53 @@
         }
       ],
       "objectID": "120436DB-4BCC-4C9B-EC4F-3144667EA615",
-      "x": 738.5,
-      "y": 258.5,
-      "z": 3.067999839782715
+      "x": 426.19232177734375,
+      "y": 250.8077392578125,
+      "z": 13.568015098571777
+    },
+    {
+      "activeDrawerID": "BFC43774-23B5-4692-82C3-00A09EC72114",
+      "classID": "96C3549D-69BE-4F8B-B83A-A2923DB8D09F",
+      "collapsed": true,
+      "drawers": [
+        {
+          "classID": "BFC43774-23B5-4692-82C3-00A09EC72114",
+          "name": "map"
+        },
+        {
+          "autoScale": false,
+          "classID": "A2BDB410-F257-4360-8615-B821BE548FBD",
+          "drawInfo": true,
+          "lineWidth": 1.5,
+          "name": "lines (x=t)",
+          "offset": 0.0,
+          "scale": 1.0
+        },
+        {
+          "autoScale": false,
+          "bufferSize": 64,
+          "classID": "DD1010AE-A63C-4736-906A-E7FF4C8DCAEB",
+          "drawInfo": true,
+          "lineWidth": 1.5,
+          "name": "lines (hist)",
+          "offset": 0.0,
+          "scale": 1.0
+        },
+        {
+          "bufferSize": 64,
+          "classID": "723FA6EE-CB10-4ED5-848C-1F75672ED1F1",
+          "name": "map (hist)"
+        }
+      ],
+      "objectID": "570B18E0-2849-2E01-731A-7C5EB22FCC77",
+      "x": -562.727783203125,
+      "y": -676.33740234375,
+      "z": 29.08400535583496
     },
     {
       "activeDrawerID": "DD1010AE-A63C-4736-906A-E7FF4C8DCAEB",
       "classID": "40DE5B8D-4FCF-4A69-A65C-EBCC94D86034",
-      "collapsed": false,
+      "collapsed": true,
       "drawers": [
         {
           "classID": "BFC43774-23B5-4692-82C3-00A09EC72114",
@@ -424,7 +1600,7 @@
           "lineWidth": 1.5,
           "name": "lines (hist)",
           "offset": -1.0,
-          "scale": 0.10000000149011612
+          "scale": 0.05000000074505806
         },
         {
           "bufferSize": 64,
@@ -433,9 +1609,165 @@
         }
       ],
       "objectID": "29F420E2-6AE8-7F7E-9837-27799754E008",
-      "x": 197.5,
-      "y": 429.0,
-      "z": 11.366008758544922
+      "x": 690.0669555664063,
+      "y": -616.9793090820313,
+      "z": 14.602017402648926
+    },
+    {
+      "activeDrawerID": "BFC43774-23B5-4692-82C3-00A09EC72114",
+      "classID": "40DE5B8D-4FCF-4A69-A65C-EBCC94D86034",
+      "collapsed": true,
+      "drawers": [
+        {
+          "classID": "BFC43774-23B5-4692-82C3-00A09EC72114",
+          "name": "map"
+        },
+        {
+          "autoScale": false,
+          "classID": "A2BDB410-F257-4360-8615-B821BE548FBD",
+          "drawInfo": true,
+          "lineWidth": 1.5,
+          "name": "lines (x=t)",
+          "offset": 0.0,
+          "scale": 1.0
+        },
+        {
+          "autoScale": false,
+          "bufferSize": 64,
+          "classID": "DD1010AE-A63C-4736-906A-E7FF4C8DCAEB",
+          "drawInfo": true,
+          "lineWidth": 1.5,
+          "name": "lines (hist)",
+          "offset": 0.0,
+          "scale": 1.0
+        },
+        {
+          "bufferSize": 64,
+          "classID": "723FA6EE-CB10-4ED5-848C-1F75672ED1F1",
+          "name": "map (hist)"
+        }
+      ],
+      "objectID": "4D0967F1-1BB2-5698-3A0F-874F711DEC5E",
+      "x": -1091.2276611328125,
+      "y": -765.83740234375,
+      "z": 27.016008377075195
+    },
+    {
+      "activeDrawerID": "DD1010AE-A63C-4736-906A-E7FF4C8DCAEB",
+      "classID": "9B0C9707-2EB0-4551-99D8-9863E1580F06",
+      "collapsed": false,
+      "drawers": [
+        {
+          "classID": "BFC43774-23B5-4692-82C3-00A09EC72114",
+          "name": "map"
+        },
+        {
+          "autoScale": false,
+          "classID": "A2BDB410-F257-4360-8615-B821BE548FBD",
+          "drawInfo": true,
+          "lineWidth": 1.5,
+          "name": "lines (x=t)",
+          "offset": 0.0,
+          "scale": 1.0
+        },
+        {
+          "autoScale": false,
+          "bufferSize": 64,
+          "classID": "DD1010AE-A63C-4736-906A-E7FF4C8DCAEB",
+          "drawInfo": true,
+          "lineWidth": 1.5,
+          "name": "lines (hist)",
+          "offset": 0.0,
+          "scale": 0.07999999821186066
+        },
+        {
+          "bufferSize": 64,
+          "classID": "723FA6EE-CB10-4ED5-848C-1F75672ED1F1",
+          "name": "map (hist)"
+        }
+      ],
+      "objectID": "6E4953FD-0039-26E1-B460-4A200A77335C",
+      "x": 761.416015625,
+      "y": 28.33203125,
+      "z": 17.670021057128906
+    },
+    {
+      "activeDrawerID": "BFC43774-23B5-4692-82C3-00A09EC72114",
+      "classID": "96C3549D-69BE-4F8B-B83A-A2923DB8D09F",
+      "collapsed": true,
+      "drawers": [
+        {
+          "classID": "BFC43774-23B5-4692-82C3-00A09EC72114",
+          "name": "map"
+        },
+        {
+          "autoScale": false,
+          "classID": "A2BDB410-F257-4360-8615-B821BE548FBD",
+          "drawInfo": true,
+          "lineWidth": 1.5,
+          "name": "lines (x=t)",
+          "offset": 0.0,
+          "scale": 1.0
+        },
+        {
+          "autoScale": false,
+          "bufferSize": 64,
+          "classID": "DD1010AE-A63C-4736-906A-E7FF4C8DCAEB",
+          "drawInfo": true,
+          "lineWidth": 1.5,
+          "name": "lines (hist)",
+          "offset": 0.0,
+          "scale": 1.0
+        },
+        {
+          "bufferSize": 64,
+          "classID": "723FA6EE-CB10-4ED5-848C-1F75672ED1F1",
+          "name": "map (hist)"
+        }
+      ],
+      "objectID": "1A8D00FE-79A9-37AD-890F-6F26BD49801D",
+      "x": 995.6697998046875,
+      "y": -1035.12109375,
+      "z": 5.206000328063965
+    },
+    {
+      "activeDrawerID": "DD1010AE-A63C-4736-906A-E7FF4C8DCAEB",
+      "classID": "96C3549D-69BE-4F8B-B83A-A2923DB8D09F",
+      "collapsed": false,
+      "drawers": [
+        {
+          "classID": "BFC43774-23B5-4692-82C3-00A09EC72114",
+          "name": "map"
+        },
+        {
+          "autoScale": false,
+          "classID": "A2BDB410-F257-4360-8615-B821BE548FBD",
+          "drawInfo": true,
+          "lineWidth": 1.5,
+          "name": "lines (x=t)",
+          "offset": 0.0,
+          "scale": 1.0
+        },
+        {
+          "autoScale": false,
+          "bufferSize": 64,
+          "classID": "DD1010AE-A63C-4736-906A-E7FF4C8DCAEB",
+          "drawInfo": true,
+          "lineWidth": 1.5,
+          "name": "lines (hist)",
+          "offset": 0.0,
+          "scale": 1.0
+        },
+        {
+          "bufferSize": 64,
+          "classID": "723FA6EE-CB10-4ED5-848C-1F75672ED1F1",
+          "name": "map (hist)"
+        }
+      ],
+      "objectID": "4E964CFF-3AEC-6B4B-FC5F-AD7EB741F61A",
+      "x": 437.2484130859375,
+      "y": -1047.432373046875,
+      "z": 20.792016983032227
     }
   ]
 }
