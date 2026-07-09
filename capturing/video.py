@@ -9,7 +9,9 @@ import subprocess
 
 class VideoDevice:
 
-    ext = ".mp4"
+    # ext = ".mp4"  ## NOTE: issue with 64-bit timestamps - cause overflow and crash for longer videos in movenc.c before writing the file index (moov atom) 
+                    ## solution: either use mkv (supports 64-bit TS) or allow 64-bit TS in mp4 with '-movflags +use_metadata_tags'
+    ext = ".mkv"
 
     def __init__(self, id, name, url):
         self.id = id
@@ -18,6 +20,18 @@ class VideoDevice:
 
         self.isRecording = False
         self.supportsMJPEG = self.checkMJPEG()
+
+        ### 720p
+        self.width = 1280
+        self.height = 720
+        self.fps = 15
+        self.bitrate = '4M'
+
+        ### full-HD
+        # self.width = 1920
+        # self.height = 1080
+        # self.fps = 15
+        # self.bitrate = '8M'
 
         self.process = None
         self.logFile = None
@@ -51,9 +65,9 @@ class VideoDevice:
 
         timestr = time.strftime("%Y-%m-%d %H-%M-%S", time.localtime())
         if len(name) > 0:
-            filename = f"{self.id}--{name}--{timestr}{self.ext}"
+            filename = f"{name}--{self.id}--{timestr}{self.ext}"
         else:
-            filename = f"{self.id}--{timestr}{self.ext}"
+            filename = f"unnamed--{self.id}--{timestr}{self.ext}"
 
         if ffmpeg.captureVideo(self, filename, True):
             self.isRecording = True
@@ -92,7 +106,7 @@ class VideoDevice:
         self.isRecording = False
 
     def checkMJPEG(self):
-        lines = ffmpeg.videoOptions(self)
+        lines = ffmpeg.videoOptions(self.url)
         print(f"checking for MJPEG support ({self.url})")
         for l in lines:
             l = l.lstrip()

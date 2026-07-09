@@ -75,12 +75,11 @@ class Config:
             dict = json.load(f)
             return dict
 
-
 class CaptureManager:
     def __init__(self):
 
         config = Config()
-
+        
         self.isClosing = False
         self.isCapturing = False
 
@@ -117,30 +116,36 @@ class CaptureManager:
             print(f"- {foundVideo[v]} ({v})")
 
         self.audio = []
-        for a in config.audio:
-            url = config.audio[a]
-            try:
-                device = foundAudio[url]
-            except KeyError:
-                device = None
-            if device:
-                print(f"creating audio device ID: {a}, name: {device}, url: {url}")
-                self.audio.append(AudioDevice(a, device, url))
-            else:
-                utils.error(f"audio device not available: {a} ({url})")
+        if config.audio:
+            for a in config.audio:
+                url = config.audio[a]
+                try:
+                    device = foundAudio[url]
+                except KeyError:
+                    device = None
+                if device:
+                    print(f"creating audio device ID: {a}, name: {device}, url: {url}")
+                    self.audio.append(AudioDevice(a, device, url))
+                else:
+                    utils.error(f"audio device not available: {a} ({url})")
+        else:
+            utils.warn("no audio devices specified")
 
         self.video = []
-        for v in config.video:
-            url = config.video[v]
-            try:
-                device = foundVideo[url]
-            except KeyError:
-                device = None
-            if device:
-                print(f"creating video device ID: {v}, name: {device}, url: {url}")
-                self.video.append(VideoDevice(v, device, url))
-            else:
-                utils.error(f"video device not available: {v} ({url})")
+        if config.video:
+            for v in config.video:
+                url = config.video[v]
+                try:
+                    device = foundVideo[url]
+                except KeyError:
+                    device = None
+                if device:
+                    print(f"creating video device ID: {v}, name: {device}, url: {url}")
+                    self.video.append(VideoDevice(v, device, url))
+                else:
+                    utils.error(f"video device not available: {v} ({url})")
+        else:
+            utils.warn("no video devices specified")
 
         # print(f"FOUND {len(self.audio)} AUDIO DEVICES:")
         # for i,a in enumerate(self.audio):
@@ -156,7 +161,7 @@ class CaptureManager:
         print("cleaning up video devices")
         for v in self.video:
             v.cleanup()
-        
+
     def oscStartCapture(self, address, *args):
         if len(args) > 1:
             utils.warn(f"invalid number of arguments in osc {osc.startCommand}: {len(args)}, using first one as name: {args[0]}")
@@ -169,7 +174,6 @@ class CaptureManager:
                 fileName = args[0]
             print(f"OSC: received START capture (name: \"{fileName}\")")
 
-
             if self.isClosing:
                 utils.warn("currently closing, try again later")
                 return
@@ -177,10 +181,13 @@ class CaptureManager:
                 utils.warn("already capturing")
                 return
 
-            for v in self.video:
-                v.startCapture(fileName)
+            utils.logger.open(f"{fileName}-log.csv")
+
             for a in self.audio:
                 a.startCapture(fileName)
+            for v in self.video:
+                v.startCapture(fileName)
+            print(f"started ffmpeg instances for {len(self.audio)} audio and {len(self.video)} video devices")
 
             self.isCapturing = True
 
@@ -204,6 +211,8 @@ class CaptureManager:
                 v.stopCapture()
             for a in self.audio:
                 a.stopCapture()
+            utils.logger.close()
+            print(f"stopped ffmpeg instances for {len(self.audio)} audio and {len(self.video)} video devices")
 
             self.isCapturing = False
             self.isClosing = False
@@ -225,7 +234,7 @@ class MarkerManager:
         print(f"received marker: {msg}")
 
         if not capture.isCapturing:
-            utils.warn("received trigger while capturing")
+            utils.warn("received trigger while not capturing")
 
         utils.log(self, msg)
 
@@ -245,26 +254,13 @@ def cleanup():
 atexit.register(cleanup)
 
 # # Map OSC addresses to the manager functions
-dispatch.map(oscStartCommand, capture.oscStartCapture)
-dispatch.map(oscStopCommand, capture.oscStopCapture)
-dispatch.map(oscMarkerCommand, marker.oscMarker)
+dispatch.map(osc.startCommand, capture.oscStartCapture)
+dispatch.map(osc.stopCommand, capture.oscStopCapture)
+dispatch.map(osc.markerCommand, marker.oscMarker)
 
-print(f"Listening for OSC on port {oscPort}...")
+print(f"Listening for OSC on port {osc.port}...")
 server.serve_forever()
 
-# if manager.video[0].startCapture("test") == True:
-#     time.sleep(3)
-#     manager.video[0].stopCapture()
-
-# if manager.audio[0].startCapture("test") == True:
-#     time.sleep(3)
-#     manager.audio[0].stopCapture()
-
-
-# v = manager.video[0].startCapture()
-# a = manager.audio[0].startCapture()
-# time.sleep(3)
-# if v:
-#     manager.video[0].stopCapture()
-# if a:
-#     manager.audio[0].stopCapture()
+#v = capture.video[0]
+#ffmpeg.snapshot(v, 'test')
+#time.sleep(5)

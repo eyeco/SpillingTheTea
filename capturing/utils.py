@@ -52,9 +52,16 @@ class Logger:
 
     columns = ["timestamp","datetime","device","event"]
 
-    def __init__(self, filename="event-log.csv"):
+    def __init__(self):
 
         checkOrCreate(outdir)
+
+        self.isOpen = False
+
+    def open(self, filename):
+
+        if self.isOpen:
+            self.close()
 
         path = f"{outdir}\\{filename}"
 
@@ -65,19 +72,27 @@ class Logger:
         if not exists:
             # self.writer.writeheader()
             self.writer.writerow(self.columns)
-
-    def write(self, ts, desc, msg):
-        print(f"logging: {desc}: {msg}")
-        dt = datetime.fromtimestamp(ts).strftime('%Y-%m-%d %H:%M:%S.%f')[:-3]
-        self.writer.writerow([ts,dt,desc,msg])
-        self.file.flush()
+        
+        self.isOpen = True
 
     def close(self):
         if self.file:
             print("closing CSV file")
             self.file.close()
 
-global logger
+        self.isOpen = False
+
+    def write(self, ts, desc, msg):
+
+        if self.isOpen:
+            print(f"logging: {desc}: {msg}")
+            dt = datetime.fromtimestamp(ts).strftime('%Y-%m-%d %H:%M:%S.%f')#[:-3]
+            self.writer.writerow([ts,dt,desc,msg])
+            self.file.flush()
+        else:
+            error("no CSV file opened, not writing marker")
+
+global logger 
 logger = Logger()
 
 def log(device,event):

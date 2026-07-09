@@ -33,8 +33,8 @@
 #include <WiFi.h>
 #include <OSCBundle.h>
 
-const char *ssid = "kjp45!";
-const char *key = "palmTr33";
+const char *ssid = "<ENTER SSID HERE>";
+const char *key = "<ENTER KEY HERE>";
 
 WiFiUDP udp;
 
@@ -390,7 +390,8 @@ void setup()
 	echoFrame.set<float>( 0.0f );
 	if (!echoSender.init(&echoFrame, DID, 254))
 		enterErrorState("failed to init echo sender");
-	
+	//-----
+
 	Serial.println("initing DONE");
 }
 

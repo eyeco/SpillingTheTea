@@ -4,6 +4,7 @@ import utils
 
 import os
 import subprocess
+import datetime
 from pathlib import Path
 
 def enum():
@@ -64,19 +65,30 @@ def captureAudio(device, filename):
     
     print(f"starting to record file {pathAud}")
 
-    channels = 1
-    rate = 48000
-    bits = 16
+    initial_timecode = datetime.datetime.now().strftime("%H:%M:%S:00")
+
     cmd = [
         'ffmpeg', '-hide_banner',
         '-f', 'dshow', 
         '-use_wallclock_as_timestamps', '1',
 
-        '-channels', f'{channels}',
-        '-sample_rate', f'{rate}',
-        '-sample_size', f'{bits}',
+        '-channels', f'{device.channels}',
+        '-sample_rate', f'{device.rate}',
+        '-sample_size', f'{device.bits}',
 
         '-i', f'audio={device.url}',
+
+        #'-af', 'aresample=async=1:first_pts=0',
+        '-async', '1',              # prevent timestamp drifting
+
+        '-flush_packets', '1',      # don't buffer, bypass windows cache
+
+        '-c:a', 'aac',
+
+        '-b:a', device.bitrate,
+
+        "-timecode", initial_timecode,
+
         pathAud
     ]
     utils.logcmd(f"{' '.join(cmd)}")
@@ -159,21 +171,34 @@ def captureVideo(device, filename, tryMJPEG):
 
     print(f"starting to record file {pathVid}")
 
-    format = 'yuyv422'
+    initial_timecode = datetime.datetime.now().strftime("%H:%M:%S:00")
+
+    option = '-pixel_format'
+    value = 'yuyv422'
     if tryMJPEG == True and device.supportsMJPEG == True:
-        format = 'mjpeg'
+        option = '-vcodec'
+        value = 'mjpeg'
     cmd = [
         'ffmpeg', '-hide_banner',
         '-f', 'dshow', 
         '-use_wallclock_as_timestamps', '1',
 
-        '-pixel_format', format, 
-        # '-video_size', '640x480',
-        # '-framerate', '25',
+        option, value, 
+        '-video_size', f'{device.width}x{device.height}',
+        '-framerate', f'{device.fps}',
 
         '-i', f'video={device.url}',
-        #'-c:v', 'libx264', '-preset', 'veryfast', 
+
+        '-flush_packets', '1',      # don't buffer, bypass windows cache
+
+        #'-c:v', 'libx264', '-preset', 'veryfast', '-pix_fmt', 'yuv420p',
+        '-c:v', 'libx264', '-preset', 'ultrafast', '-pix_fmt', 'yuv420p',
+
+        '-b:v', device.bitrate,
         #'-c:a', 'aac',
+
+        "-timecode", initial_timecode,
+
         pathVid
     ]
     utils.logcmd(f"{' '.join(cmd)}")

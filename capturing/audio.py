@@ -17,6 +17,12 @@ class AudioDevice:
 
         self.isRecording = False
 
+        self.channels = 1
+        self.rate = 48000
+        self.bits = 16
+        self.bitrate = '192k'
+
+
         self.process = None
         self.logFile = None
 
@@ -47,9 +53,9 @@ class AudioDevice:
         print(f"starting capturing {self.name} ({self.url})")
         timestr = time.strftime("%Y-%m-%d %H-%M-%S", time.localtime())
         if len(name) > 0:
-            filename = f"{self.id}--{name}--{timestr}{self.ext}"
+            filename = f"{name}--{self.id}--{timestr}{self.ext}"
         else:
-            filename = f"{self.id}--{timestr}{self.ext}"
+            filename = f"unnamed--{self.id}--{timestr}{self.ext}"
 
         if ffmpeg.captureAudio(self, filename):
             self.isRecording = True
