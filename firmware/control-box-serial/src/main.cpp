@@ -53,7 +53,7 @@ const int CHANNEL_SID = 1;	// sensor ID for channel data
 const int PID_DID = 1;		// PID controller's device ID
 const int PID_SID = 0;		// PID controller's sensor ID
 
-const int CHAMBER_COUNT = 1;
+const int CHAMBER_COUNT = 4;
 const int CHAMBER_COUNT_MAX = 6;
 
 // -----------------------------
