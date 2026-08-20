@@ -27,6 +27,8 @@ class VideoDevice:
         self.height = 720
         self.fps = 15
         self.bitrate = '4M'
+        self.maxrate = '4M'
+        self.bufsize = '8M'
 
         ### full-HD
         # self.width = 1920
@@ -118,4 +120,16 @@ class VideoDevice:
                     print("MJPEG SUPPORTED")
                     return True
         utils.warn(f"MJEPG NOT SUPPORTED ({self.name})")
+        return False
+
+    def isAlive(self):
+        if self.isRecording == False:
+            return False
+
+        if self.process == None:
+            return False
+        
+        if self.process.poll() is None:
+            return True
+
         return False

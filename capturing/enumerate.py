@@ -30,34 +30,34 @@ print("audio devices:")
 for a,url in zip(audio,audioURL):
     lines = ffmpeg.audioOptions(url)
     print(f"\t{a} ({url})")
-    print(f"\t\tformats:")
-    for l in lines:
-        ch = l.find("ch=")
-        bits = l.find("bits=")
-        rate = l.find("rate=")
-        if ch != -1 and bits != -1 and rate != -1:
-            print(f"\t\t{l[ch:]}")
-            # subs = l[ch:].split(',')
-            # ch = (int)(subs[0].strip()[3:])
-            # bits = (int)(subs[1].strip()[5:])
-            # rate = (int)(subs[2].strip()[5:])
-            # print(f"\t\tchannels {ch} sample bits {bits:2} sample rate {rate:5}")
+    # print(f"\t\tformats:")
+    # for l in lines:
+    #     ch = l.find("ch=")
+    #     bits = l.find("bits=")
+    #     rate = l.find("rate=")
+    #     if ch != -1 and bits != -1 and rate != -1:
+    #         print(f"\t\t{l[ch:]}")
+    #         # subs = l[ch:].split(',')
+    #         # ch = (int)(subs[0].strip()[3:])
+    #         # bits = (int)(subs[1].strip()[5:])
+    #         # rate = (int)(subs[2].strip()[5:])
+    #         # print(f"\t\tchannels {ch} sample bits {bits:2} sample rate {rate:5}")
 
 print("video devices:")
 for v,url in zip(video,videoURL):
     lines = ffmpeg.videoOptions(url)
     print(f"\t{v} ({url})")
-    print(f"\t\tformats:")
-    for l in lines:
-        px = l.find("pixel_format=")
-        min = l.find("min")
-        max = l.find("max")
-        if px != -1 and min != -1 and max != -1:
-            print(f"\t\t{l[px:]}")
-    print(f"\t\tcodecs:")
-    for l in lines:
-        cd = l.find("vcodec=")
-        min = l.find("min")
-        max = l.find("max")
-        if cd != -1 and min != -1 and max != -1:
-            print(f"\t\t{l[cd:]}")
+    # print(f"\t\tformats:")
+    # for l in lines:
+    #     px = l.find("pixel_format=")
+    #     min = l.find("min")
+    #     max = l.find("max")
+    #     if px != -1 and min != -1 and max != -1:
+    #         print(f"\t\t{l[px:]}")
+    # print(f"\t\tcodecs:")
+    # for l in lines:
+    #     cd = l.find("vcodec=")
+    #     min = l.find("min")
+    #     max = l.find("max")
+    #     if cd != -1 and min != -1 and max != -1:
+    #         print(f"\t\t{l[cd:]}")

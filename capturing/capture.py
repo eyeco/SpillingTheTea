@@ -11,8 +11,12 @@ import os
 import json
 import time
 import atexit
+import threading
 
 from pythonosc import dispatcher
+from pythonosc.udp_client import SimpleUDPClient
+
+oscPortInterface = 6668
 
 class Config:
 
@@ -154,7 +158,60 @@ class CaptureManager:
         # for i,v in enumerate(self.video):
         #     print(f"  {i}: {v}")
 
+        self.oscClient = SimpleUDPClient("127.0.0.1", oscPortInterface)
+
+        self.lock = (
+            threading.Lock()
+        )
+        self.stopEvent = threading.Event()
+        self.pollThread = None
+
+        self.startPolling()
+
+    def startPolling(self):
+        self.stopEvent.clear()
+        self.pollThread = threading.Thread(
+            target=self.pollLoop, daemon=True
+        )
+        self.pollThread.start()
+
+    def stopPolling(self):
+        self.stopEvent.set()
+        if self.pollThread:
+            self.pollThread.join()
+            self.pollThread = None
+
+    def pollLoop(self):
+        print("starting polling")
+        while not self.stopEvent.wait(timeout=1.0):
+
+            audAlive = None
+            if self.audio != None:
+                if len(self.audio) != 0:
+                    audAlive = [0] * len(self.audio)
+            vidAlive = None
+            if self.video != None:
+                if len(self.video) != 0:
+                    vidAlive = [0] * len(self.video)
+
+            with self.lock:
+                for i in range(len(self.audio)):
+                    audAlive[i] = self.audio[i].isAlive()
+                for i in range(len(self.video)):
+                    vidAlive[i] = self.video[i].isAlive()
+
+            if audAlive != None:
+                if len(audAlive) != 0:
+                    self.oscClient.send_message("/alive/audio", audAlive )
+            if vidAlive != None:
+                if len(vidAlive) != 0:
+                    self.oscClient.send_message("/alive/video", vidAlive )
+
     def cleanup(self):
+
+        print("stopping polling")
+        self.stopPolling()
+
         print("cleaning up audio devices")
         for a in self.audio:
             a.cleanup()
@@ -188,10 +245,11 @@ class CaptureManager:
             filename = os.path.join(directory, "log.csv")
             utils.logger.open(filename)
 
-            for a in self.audio:
-                a.startCapture(name)
-            for v in self.video:
-                v.startCapture(name)
+            with self.lock:
+                for a in self.audio:
+                    a.startCapture(name)
+                for v in self.video:
+                    v.startCapture(name)
             print(f"started ffmpeg instances for {len(self.audio)} audio and {len(self.video)} video devices")
 
             self.isCapturing = True
@@ -212,10 +270,11 @@ class CaptureManager:
             
             self.isClosing = True
 
-            for v in self.video:
-                v.stopCapture()
-            for a in self.audio:
-                a.stopCapture()
+            with self.lock:
+                for v in self.video:
+                    v.stopCapture()
+                for a in self.audio:
+                    a.stopCapture()
             utils.logger.close()
             print(f"stopped ffmpeg instances for {len(self.audio)} audio and {len(self.video)} video devices")
 

@@ -180,6 +180,9 @@ def captureVideo(device, directory, filename, tryMJPEG):
         value = 'mjpeg'
     cmd = [
         'ffmpeg', '-hide_banner',
+
+        '-threads', '2',
+
         '-f', 'dshow', 
         '-use_wallclock_as_timestamps', '1',
 
@@ -189,13 +192,29 @@ def captureVideo(device, directory, filename, tryMJPEG):
 
         '-i', f'video={device.url}',
 
+        '-vf', 'format=nv12',
+
         '-flush_packets', '1',      # don't buffer, bypass windows cache
 
-        #'-c:v', 'libx264', '-preset', 'veryfast', '-pix_fmt', 'yuv420p',   # H.264 very fast
-        '-c:v', 'libx264', '-preset', 'ultrafast', '-pix_fmt', 'yuv420p',  # H.264 ultra fast
+        ### H264-QSV
+        '-c:v', 'h264_qsv', '-preset', 'veryfast', 
         '-b:v', device.bitrate,
+        '-maxrate', device.maxrate,
+        '-bufsize', device.bufsize,
+        ### -----
 
+        ### LIBX264
+        # H.264 very fast
+        #'-c:v', 'libx264', '-preset', 'veryfast', '-pix_fmt', 'yuv420p',
+
+        # H.264 ultra fast
+        #'-c:v', 'libx264', '-preset', 'ultrafast', '-pix_fmt', 'yuv420p',
+        #'-b:v', device.bitrate,
+        ### -----
+
+        ### MJPEG
         #'-c:v', 'copy',     #write directly to disc
+        ### -----
 
         #'-c:a', 'aac',
 

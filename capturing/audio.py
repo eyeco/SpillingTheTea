@@ -105,6 +105,6 @@ class AudioDevice:
             return False
         
         if self.process.poll() is None:
-            return False
+            return True
 
-        return True
+        return False

@@ -13,6 +13,7 @@ BLUE = "\033[34m"
 RESET = "\033[0m"
 
 outdir = "L:\\stt"
+#outdir = "C:\\Users\\Festival2026\\Desktop\\stt\\recordings"
 #snapshotDir = f'{outdir}\\snapshots'
 
 def error(str):
@@ -51,10 +52,10 @@ class Logger:
     columns = ["timestamp","datetime","device","event"]
 
     def __init__(self):
-
         checkOrCreate(outdir)
 
         self.isOpen = False
+        self.file = None
 
     def open(self, filename):
 
@@ -72,7 +73,7 @@ class Logger:
         self.isOpen = True
 
     def close(self):
-        if self.file:
+        if self.file != None:
             print("closing CSV file")
             self.file.close()
 
