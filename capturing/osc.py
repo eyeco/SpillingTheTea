@@ -8,7 +8,7 @@ startCommand = "/start"
 stopCommand = "/stop"
 markerCommand = "/marker"
 
-port = 6667
+port = 6669
 
 import sys
 import traceback

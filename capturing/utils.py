@@ -13,9 +13,7 @@ BLUE = "\033[34m"
 RESET = "\033[0m"
 
 outdir = "L:\\stt"
-audioCaptureDir = f'{outdir}\\audio'
-videoCaptureDir = f'{outdir}\\video'
-snapshotDir = f'{outdir}\\snapshots'
+#snapshotDir = f'{outdir}\\snapshots'
 
 def error(str):
     print(f"{RED}ERROR: {str}{RESET}")
@@ -63,11 +61,9 @@ class Logger:
         if self.isOpen:
             self.close()
 
-        path = f"{outdir}\\{filename}"
+        exists = os.path.exists(filename) and os.path.getsize(filename) > 0
 
-        exists = os.path.exists(path) and os.path.getsize(path) > 0
-
-        self.file = open(path, "a", newline="", encoding="utf-8")
+        self.file = open(filename, "a", newline="", encoding="utf-8")
         self.writer = csv.writer(self.file)
         if not exists:
             # self.writer.writeheader()
@@ -90,7 +86,7 @@ class Logger:
             self.writer.writerow([ts,dt,desc,msg])
             self.file.flush()
         else:
-            error("no CSV file opened, not writing marker")
+            error("no CSV file opened, not writing event")
 
 global logger 
 logger = Logger()

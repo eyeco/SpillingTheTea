@@ -1,11 +1,11 @@
 {
   "video": {
-    "0": "@device_pnp_\\\\?\\usb#vid_046d&pid_085c&mi_00#7&45488dd&0&0000#{65e8773d-8f56-11d0-a3b9-00a0c9223196}\\global",
-    "1": "@device_pnp_\\\\?\\usb#vid_046d&pid_085c&mi_00#7&14a6b6&0&0000#{65e8773d-8f56-11d0-a3b9-00a0c9223196}\\global",
-    "2": "@device_pnp_\\\\?\\usb#vid_046d&pid_085c&mi_00#7&21664008&0&0000#{65e8773d-8f56-11d0-a3b9-00a0c9223196}\\global",
-    "3": "@device_pnp_\\\\?\\usb#vid_046d&pid_085c&mi_00#7&302aa3c6&0&0000#{65e8773d-8f56-11d0-a3b9-00a0c9223196}\\global"
+    "0": "@device_pnp_\\\\?\\usb#vid_046d&pid_085c&mi_00#7&21664008&1&0000#{65e8773d-8f56-11d0-a3b9-00a0c9223196}\\global",
+    "1": "@device_pnp_\\\\?\\usb#vid_046d&pid_085c&mi_00#7&45488dd&1&0000#{65e8773d-8f56-11d0-a3b9-00a0c9223196}\\global",
+    "2": "@device_pnp_\\\\?\\usb#vid_046d&pid_085c&mi_00#8&302aa3c6&0&0000#{65e8773d-8f56-11d0-a3b9-00a0c9223196}\\global",
+    "3": "@device_pnp_\\\\?\\usb#vid_046d&pid_085c&mi_00#8&14a6b6&0&0000#{65e8773d-8f56-11d0-a3b9-00a0c9223196}\\global"
   },
   "audio": {
-    "0": "@device_cm_{33D9A762-90C8-11D0-BD43-00A0C911CE86}\\wave_{78C0CFE4-7712-4A95-9698-940A9B12C263}"
+    "0": "@device_cm_{33D9A762-90C8-11D0-BD43-00A0C911CE86}\\wave_{B6295DC3-C6F6-4AA6-B8DE-370D9522F3F5}"
   }
 }

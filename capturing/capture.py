@@ -167,12 +167,13 @@ class CaptureManager:
             utils.warn(f"invalid number of arguments in osc {osc.startCommand}: {len(args)}, using first one as name: {args[0]}")
 
         try:
-            fileName = ""
+            name = ""
             if len(args) == 0:
-                utils.warn(f"argument missing in osc {osc.startCommand}: {len(args)} - using blank name")
+                utils.error(f"argument missing in osc {osc.startCommand}: {len(args)}")
+                return
             else:
-                fileName = args[0]
-            print(f"OSC: received START capture (name: \"{fileName}\")")
+                name = args[0]
+            print(f"OSC: received START capture: {address} (name: \"{name}\")")
 
             if self.isClosing:
                 utils.warn("currently closing, try again later")
@@ -181,12 +182,16 @@ class CaptureManager:
                 utils.warn("already capturing")
                 return
 
-            utils.logger.open(f"{fileName}-log.csv")
+            directory = os.path.join(utils.outdir, name)
+            utils.checkOrCreate(directory),
+
+            filename = os.path.join(directory, "log.csv")
+            utils.logger.open(filename)
 
             for a in self.audio:
-                a.startCapture(fileName)
+                a.startCapture(name)
             for v in self.video:
-                v.startCapture(fileName)
+                v.startCapture(name)
             print(f"started ffmpeg instances for {len(self.audio)} audio and {len(self.video)} video devices")
 
             self.isCapturing = True
@@ -224,19 +229,22 @@ class MarkerManager:
 
     def oscMarker(self, address, *args):
 
-        msg = ""
-        if len(args) == 0:
-            utils.warn(f"no arguments in {osc.markerCommand}: {len(args)}")
-            msg = "<empty>"
-        else:
-            msg = " ".join(args)
-        
-        print(f"received marker: {msg}")
+        if not args or len(args) == 0:
+            utils.error(f"argument missing in osc marker")
+            return
+        if len(args) != 1:
+            utils.warn(f"unexpected number of arguments in osc marker: {len(args)}")
 
-        if not capture.isCapturing:
-            utils.warn("received trigger while not capturing")
+        try:
+            val = int(args[0])
+            
+            if val > 0:
+                print(f"received marker: {address}")
+                utils.log(self, address)
 
-        utils.log(self, msg)
+        except (ValueError, TypeError):
+            utils.error(f"argument '{args[0]}' is not a valid integer in osc marker (type: {type(args[0]).__name__}).")
+            return
 
     def desc(self):
         return "marker"
@@ -247,6 +255,7 @@ marker = MarkerManager()
 dispatch = dispatcher.Dispatcher()
 server = osc.SafeThreadingOSCServer(("127.0.0.1", osc.port), dispatch)
 
+
 def cleanup():
     capture.cleanup()
     utils.logger.close()
@@ -256,7 +265,8 @@ atexit.register(cleanup)
 # # Map OSC addresses to the manager functions
 dispatch.map(osc.startCommand, capture.oscStartCapture)
 dispatch.map(osc.stopCommand, capture.oscStopCapture)
-dispatch.map(osc.markerCommand, marker.oscMarker)
+dispatch.set_default_handler(marker.oscMarker)
+
 
 print(f"Listening for OSC on port {osc.port}...")
 server.serve_forever()

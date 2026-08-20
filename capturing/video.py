@@ -1,5 +1,6 @@
 # video.py
 
+import os
 import utils
 import ffmpeg
 
@@ -57,19 +58,21 @@ class VideoDevice:
         if self.logFile:
             self.logFile.close()
 
-    def startCapture(self, name=""):
+    def startCapture(self, name):
         if self.isRecording:
             self.stopCapture()
 
-        print(f"starting capturing {self.name} ({self.url})")
-
         timestr = time.strftime("%Y-%m-%d %H-%M-%S", time.localtime())
         if len(name) > 0:
-            filename = f"{name}--{self.id}--{timestr}{self.ext}"
+            filename = f"V-{self.id}-{timestr}{self.ext}"
         else:
-            filename = f"unnamed--{self.id}--{timestr}{self.ext}"
+            utils.error("name not set for audio")
+            return False
 
-        if ffmpeg.captureVideo(self, filename, True):
+        directory = os.path.join(utils.outdir, name)
+
+        print(f"starting capturing {self.name} ({self.url})")
+        if ffmpeg.captureVideo(self, directory, filename, True):
             self.isRecording = True
             utils.log(self, f"start ({filename})")
         else:

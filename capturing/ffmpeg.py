@@ -52,15 +52,15 @@ def videoOptions(url):
 
     return lines
 
-def captureAudio(device, filename):
+def captureAudio(device, directory, filename):
 
-    utils.checkOrCreate(utils.audioCaptureDir)
+    utils.checkOrCreate(directory)
 
-    pathAud = os.path.join(utils.audioCaptureDir, filename)
+    pathAud = os.path.join(directory, filename)
     pathLog = os.path.splitext(pathAud)[0] + ".log"
 
     if os.path.exists(pathAud):
-        utils.error(f"file {filename} already exists in {utils.audioCaptureDir} - will not overwrite")
+        utils.error(f"file {filename} already exists in {directory} - will not overwrite")
         return False
     
     print(f"starting to record file {pathAud}")
@@ -158,15 +158,15 @@ def snapshot(device, filename):
 
     return True
 
-def captureVideo(device, filename, tryMJPEG):
+def captureVideo(device, directory, filename, tryMJPEG):
 
-    utils.checkOrCreate(utils.videoCaptureDir)
+    utils.checkOrCreate(directory)
 
-    pathVid = os.path.join(utils.videoCaptureDir, filename)
+    pathVid = os.path.join(directory, filename)
     pathLog = os.path.splitext(pathVid)[0] + ".log"
 
     if os.path.exists(pathVid):
-        utils.error(f"file {filename} already exists in {utils.videoCaptureDir} - will not overwrite")
+        utils.error(f"file {filename} already exists in {directory} - will not overwrite")
         return False
 
     print(f"starting to record file {pathVid}")
@@ -191,10 +191,12 @@ def captureVideo(device, filename, tryMJPEG):
 
         '-flush_packets', '1',      # don't buffer, bypass windows cache
 
-        #'-c:v', 'libx264', '-preset', 'veryfast', '-pix_fmt', 'yuv420p',
-        '-c:v', 'libx264', '-preset', 'ultrafast', '-pix_fmt', 'yuv420p',
-
+        #'-c:v', 'libx264', '-preset', 'veryfast', '-pix_fmt', 'yuv420p',   # H.264 very fast
+        '-c:v', 'libx264', '-preset', 'ultrafast', '-pix_fmt', 'yuv420p',  # H.264 ultra fast
         '-b:v', device.bitrate,
+
+        #'-c:v', 'copy',     #write directly to disc
+
         #'-c:a', 'aac',
 
         "-timecode", initial_timecode,
