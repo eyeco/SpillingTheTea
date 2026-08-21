@@ -4,6 +4,7 @@ import os
 import csv
 import time
 
+import threading
 from datetime import datetime
 
 # ANSI escape codes for color formatting on console
@@ -48,49 +49,124 @@ def checkOrCreate(path):
     return True
 
 class Logger:
-
-    columns = ["timestamp","datetime","device","event"]
-
-    def __init__(self):
+    def __init__(self, header):
         checkOrCreate(outdir)
 
         self.isOpen = False
+
         self.file = None
+        self.writer = None
+
+        self.header = header
+
+        self._lock = threading.Lock()
 
     def open(self, filename):
+        with self._lock:
+            if self.isOpen:
+                self._close_unlocked()
 
-        if self.isOpen:
-            self.close()
+            exists = os.path.exists(filename) and os.path.getsize(filename) > 0
 
-        exists = os.path.exists(filename) and os.path.getsize(filename) > 0
-
-        self.file = open(filename, "a", newline="", encoding="utf-8")
-        self.writer = csv.writer(self.file)
-        if not exists:
-            # self.writer.writeheader()
-            self.writer.writerow(self.columns)
+            self.file = open(filename, "a", newline="", encoding="utf-8")
+            self.writer = csv.writer(self.file)
+            if not exists:
+                self.writer.writerow(self.header)
         
-        self.isOpen = True
+            self.isOpen = True
 
     def close(self):
-        if self.file != None:
+        with self._lock:
+            self._close_unlocked()
+
+    def _close_unlocked(self):
+        if self.file is not None and not self.file.closed:
             print("closing CSV file")
             self.file.close()
-
+            self.file = None
+            self.writer = None
         self.isOpen = False
 
-    def write(self, ts, desc, msg):
+class EventLogger(Logger):
+    def __init__(self):
+        super().__init__(["timestamp","datetime","device","event"])
 
-        if self.isOpen:
-            print(f"logging: {desc}: {msg}")
-            dt = datetime.fromtimestamp(ts).strftime('%Y-%m-%d %H:%M:%S.%f')#[:-3]
-            self.writer.writerow([ts,dt,desc,msg])
-            self.file.flush()
-        else:
-            error("no CSV file opened, not writing event")
+    def write(self, ts, desc, msg):
+        with self._lock:
+            if self.isOpen:
+                print(f"logging: {desc}: {msg}")
+                dt = datetime.fromtimestamp(ts).strftime('%Y-%m-%d %H:%M:%S.%f')#[:-3]
+                self.writer.writerow([ts,dt,desc,msg])
+                self.file.flush()
+            else:
+                error("no CSV file opened, not writing event")
+
+class MyoLogger(Logger):
+    def __init__(self):
+        super().__init__([
+            "ts-sys", "ts-dev",
+            "EMG-ch0", "EMG-ch1", "EMG-ch2", "EMG-ch3", "EMG-ch4", "EMG-ch5", "EMG-ch6", "EMG-ch7",
+            # "ORI-w", "ORI-x", "ORI-y", "ORI-z", 
+            # "ACC-x", "ACC-y", "ACC-z",
+            # "GYRO-x", "GYRO-y", "GYRO-z"
+            ])
+
+    def write(self, tsSys, tsDev, values):
+        if len(values) != len(self.header) - 2:
+            raise RuntimeError(f"number of entries ({len(values)}) does not match number of columns ({len(self.header)-2})")
+
+        with self._lock:
+            if self.isOpen:
+                self.writer.writerow([tsSys,tsDev,*values])
+                self.file.flush()
+            else:
+                warn("no CSV file opened, not writing event")
+
+class UILogger(Logger):
+    def __init__(self):
+        super().__init__([
+            "ts-sys", "ts-dev",
+            "FSR-0", "FSR-1", "FSR-2", "FSR-3",
+            "FSR-4", "FSR-5", "FSR-6", "FSR-7",
+            "FSR-8", "FSR-9", "FSR-10", "FSR-11"
+            ])
+
+    def write(self, tsSys, tsDev, values):
+        if len(values) != len(self.header) - 2:
+            raise RuntimeError(f"number of entries ({len(values)}) does not match number of columns ({len(self.header)-2})")
+
+        with self._lock:
+            if self.isOpen:
+                self.writer.writerow([tsSys,tsDev,*values])
+                self.file.flush()
+            else:
+                error("no CSV file opened, not writing event")
+
+class BoxLogger(Logger):
+    def __init__(self):
+        super().__init__([
+            "ts-sys", "ts-dev",
+            "T-0", "P-0", "out-0",
+            "T-1", "P-1", "out-1",
+            "T-2", "P-2", "out-2",
+            "T-3", "P-3", "out-3",
+            "T-4", "P-4", "out-4",
+            "T-5", "P-5", "out-5"
+            ])
+
+    def write(self, tsSys, tsDev, values):
+        if len(values) != len(self.header) - 2:
+            raise RuntimeError(f"number of entries ({len(values)}) does not match number of columns ({len(self.header)-2})")
+
+        with self._lock:
+            if self.isOpen:
+                self.writer.writerow([tsSys,tsDev,*values])
+                self.file.flush()
+            else:
+                error("no CSV file opened, not writing event")
 
 global logger 
-logger = Logger()
+logger = EventLogger()
 
 def log(device,event):
     try:

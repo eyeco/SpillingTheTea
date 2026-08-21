@@ -8,6 +8,12 @@ startCommand = "/start"
 stopCommand = "/stop"
 markerCommand = "/marker"
 
+myoCommand = "/log/myo"
+uiCommand = "/log/ui"
+box0Command = "/log/box/0"
+box1Command = "/log/box/1"
+box2Command = "/log/box/2"
+
 port = 6669
 
 import sys

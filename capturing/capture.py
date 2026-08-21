@@ -16,7 +16,11 @@ import threading
 from pythonosc import dispatcher
 from pythonosc.udp_client import SimpleUDPClient
 
+numUsers = 3
 oscPortInterface = 6668
+
+def toTimestamp(d,h,m,s,ms):
+    return ( ( d * 24 + h ) * 60 + m ) * 60 + s + ms / 1000
 
 class Config:
 
@@ -166,6 +170,12 @@ class CaptureManager:
         self.stopEvent = threading.Event()
         self.pollThread = None
 
+        self.myoLogger = utils.MyoLogger()
+        self.uiLogger = utils.UILogger()
+        self.boxLoggers = []
+        for i in range(numUsers):
+            self.boxLoggers.append(utils.BoxLogger())
+
         self.startPolling()
 
     def startPolling(self):
@@ -219,6 +229,11 @@ class CaptureManager:
         for v in self.video:
             v.cleanup()
 
+        self.myoLogger.close()
+        self.uiLogger.close()
+        for l in self.boxLoggers:
+            l.close()
+
     def oscStartCapture(self, address, *args):
         if len(args) > 1:
             utils.warn(f"invalid number of arguments in osc {osc.startCommand}: {len(args)}, using first one as name: {args[0]}")
@@ -242,8 +257,12 @@ class CaptureManager:
             directory = os.path.join(utils.outdir, name)
             utils.checkOrCreate(directory),
 
-            filename = os.path.join(directory, "log.csv")
-            utils.logger.open(filename)
+            utils.logger.open(os.path.join(directory, "log.csv"))
+
+            self.myoLogger.open(os.path.join(directory, "myo.csv"))
+            self.uiLogger.open(os.path.join(directory, "ui.csv"))
+            for i in range(len(self.boxLoggers)):
+                self.boxLoggers[i].open(os.path.join(directory, f"box-{i}.csv"))
 
             with self.lock:
                 for a in self.audio:
@@ -275,14 +294,102 @@ class CaptureManager:
                     v.stopCapture()
                 for a in self.audio:
                     a.stopCapture()
-            utils.logger.close()
             print(f"stopped ffmpeg instances for {len(self.audio)} audio and {len(self.video)} video devices")
+
+            utils.logger.close()
+            
+            self.myoLogger.close()
+            self.uiLogger.close()
+            for i in range(len(self.boxLoggers)):
+                self.boxLoggers[i].close()
 
             self.isCapturing = False
             self.isClosing = False
 
         except Exception as e:
             utils.error(f"caught exception in oscStopCapture: \"{e}\"")
+
+    def oscMyoData(self, address, *args):
+        try:
+            if not self.isCapturing:
+                return
+            if self.isClosing:
+                return
+
+            if len(args) != 5+5+8:  # 5 tsDev + 5 x tsSys + 8-channel EMG
+                utils.error(f"invalid number of arguments in myo data ({len(args)})")
+                return
+            
+            if not self.myoLogger.isOpen:
+                utils.error("myo logger not opened")
+                return
+
+            d0, h0, m0, s0, ms0, d1, h1, m1, s1, ms1, *values = args
+
+            self.myoLogger.write(toTimestamp(d0,h0,m0,s0,ms0), toTimestamp(d1,h1,m1,s1,ms1), values)
+
+        except Exception as e:
+            utils.error(f"caught exception in oscMyoData: \"{e}\"")
+
+    def oscUIData(self, address, *args):
+        try:
+            if not self.isCapturing:
+                return
+            if self.isClosing:
+                return
+
+            if len(args) != 5+5+12:  # 5 tsDev + 5 x tsSys + 3 x 4 FSR
+                utils.error(f"invalid number of arguments in UI data ({len(args)})")
+                return
+            
+            if not self.uiLogger.isOpen:
+                utils.error("UI logger not opened")
+                return
+
+            d0, h0, m0, s0, ms0, d1, h1, m1, s1, ms1, *values = args
+
+            self.uiLogger.write(toTimestamp(d0,h0,m0,s0,ms0), toTimestamp(d1,h1,m1,s1,ms1), values)
+
+        except Exception as e:
+            utils.error(f"caught exception in oscUIData: \"{e}\"")
+
+    def oscBox0Data(self, address, *args):
+        try:
+            self.onBoxData(0, args)
+        except Exception as e:
+            utils.error(f"caught exception in oscBox0Data: \"{e}\"")
+
+    def oscBox1Data(self, address, *args):
+        try:
+            self.onBoxData(1, args)
+        except Exception as e:
+            utils.error(f"caught exception in oscBox1Data: \"{e}\"")
+
+    def oscBox2Data(self, address, *args):
+        try:
+            self.onBoxData(2, args)
+        except Exception as e:
+            utils.error(f"caught exception in oscBox2Data: \"{e}\"")
+
+    def onBoxData(self, userID, args):
+        if not self.isCapturing:
+            return
+        if self.isClosing:
+            return
+
+        if len(args) != 5+5+18:  # 5 x tsDev + 5 x tsSys + 6 x 3 PID data
+            utils.error(f"invalid number of arguments in box data ({len(args)})")
+            return
+
+        l = self.boxLoggers[userID]
+
+        if not l.isOpen:
+            utils.error(f"box #{userID} logger not opened")
+            return
+
+        d0, h0, m0, s0, ms0, d1, h1, m1, s1, ms1, *values = args
+
+        l.write(toTimestamp(d0,h0,m0,s0,ms0), toTimestamp(d1,h1,m1,s1,ms1), values)
 
 class MarkerManager:
 
@@ -324,6 +431,13 @@ atexit.register(cleanup)
 # # Map OSC addresses to the manager functions
 dispatch.map(osc.startCommand, capture.oscStartCapture)
 dispatch.map(osc.stopCommand, capture.oscStopCapture)
+
+dispatch.map(osc.myoCommand, capture.oscMyoData)
+dispatch.map(osc.uiCommand, capture.oscUIData)
+dispatch.map(osc.box0Command, capture.oscBox0Data)
+dispatch.map(osc.box1Command, capture.oscBox1Data)
+dispatch.map(osc.box2Command, capture.oscBox2Data)
+
 dispatch.set_default_handler(marker.oscMarker)
 
 
