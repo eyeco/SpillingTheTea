@@ -150,8 +150,7 @@ class BoxLogger(Logger):
             "T-1", "P-1", "out-1",
             "T-2", "P-2", "out-2",
             "T-3", "P-3", "out-3",
-            "T-4", "P-4", "out-4",
-            "T-5", "P-5", "out-5"
+            "T-4", "P-4", "out-4"
             ])
 
     def write(self, tsSys, tsDev, values):

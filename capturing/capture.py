@@ -338,7 +338,7 @@ class CaptureManager:
             if self.isClosing:
                 return
 
-            if len(args) != 5+5+12:  # 5 tsDev + 5 x tsSys + 3 x 4 FSR
+            if len(args) != 5+5+12:  # 5 x tsDev + 5 x tsSys + 3 x 4 FSR
                 utils.error(f"invalid number of arguments in UI data ({len(args)})")
                 return
             
@@ -377,7 +377,7 @@ class CaptureManager:
         if self.isClosing:
             return
 
-        if len(args) != 5+5+18:  # 5 x tsDev + 5 x tsSys + 6 x 3 PID data
+        if len(args) != 5+5+15:  # 5 x tsDev + 5 x tsSys + 5 x 3 PID data
             utils.error(f"invalid number of arguments in box data ({len(args)})")
             return
 
