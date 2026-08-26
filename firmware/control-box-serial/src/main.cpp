@@ -53,8 +53,8 @@ const int CHANNEL_SID = 1;	// sensor ID for channel data
 const int PID_DID = 1;		// PID controller's device ID
 const int PID_SID = 0;		// PID controller's sensor ID
 
-const int CHAMBER_COUNT = 4;
-const int CHAMBER_COUNT_MAX = 6;
+const int CHAMBER_COUNT = 5;
+const int CHAMBER_COUNT_MAX = 5;
 
 // -----------------------------
 // Pressure sensor SPI pins
@@ -64,12 +64,12 @@ const int CHAMBER_COUNT_MAX = 6;
 #ifndef _NOSPI
 const uint8_t CS_PINS[CHAMBER_COUNT_MAX] =
 	{
-		12,
-		27,
-		33,
-		15,
-		32,
-		14
+		 12
+		,27
+		,33
+		,15
+		,32
+		//,14
 	};
 
 #define SCK_PIN  5
@@ -95,26 +95,26 @@ DFRobot_GP8403 dac59(&Wire, 0x59);
 DFRobot_GP8403 dac5A(&Wire, 0x5A);
 DFRobot_GP8403 dac5B(&Wire, 0x5B);
 DFRobot_GP8403 dac5C(&Wire, 0x5C);
-DFRobot_GP8403 dac5D(&Wire, 0x5D);
+//DFRobot_GP8403 dac5D(&Wire, 0x5D);
 
 DFRobot_GP8403 *dacs[CHAMBER_COUNT_MAX] =
 	{
-		&dac58,
-		&dac59,
-		&dac5A,
-		&dac5B,
-		&dac5C,
-		&dac5D
+		 &dac58
+		,&dac59
+		,&dac5A
+		,&dac5B
+		,&dac5C
+//		,&dac5D
 	};
 
 const uint8_t dacAddresses[CHAMBER_COUNT_MAX] =
 	{
-		0x58,
-		0x59,
-		0x5A,
-		0x5B,
-		0x5C,
-		0x5D
+		 0x58
+		,0x59
+		,0x5A
+		,0x5B
+		,0x5C
+//		,0x5D
 	};
 #endif
 

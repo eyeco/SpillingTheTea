@@ -5,6 +5,7 @@ import threading
 from pythonosc import dispatcher, osc_server
 from pythonosc.udp_client import SimpleUDPClient
 from pathlib import Path
+from tkinter import messagebox
 
 #sessionOutDir = "L:\\stt"
 sessionOutDir = "C:\\Users\\Festival2026\\Desktop\\stt\\recordings"
@@ -52,6 +53,9 @@ class ButtonInterfaceApp(tk.Tk):
 
         main = tk.Frame(self)
         main.pack(fill="both", expand=True, padx=10, pady=10)
+
+        # Keep the window above all other non-topmost windows
+        self.attributes("-topmost", True)
         
         # 1. UI Setup
         self.oscStatusLabel = tk.Label(
@@ -406,6 +410,14 @@ class ButtonInterfaceApp(tk.Tk):
             pass
 
     def onClosing(self):
+        if self.recording:
+            # Prevent exit and warn the user
+            messagebox.showwarning(
+                "Recording in Progress", 
+                "Cannot stop application while recording."
+            )
+            return
+
         self.is_running = False
 
         if hasattr(self, "server"):
