@@ -6,8 +6,8 @@ from pythonosc import dispatcher, osc_server
 from pythonosc.udp_client import SimpleUDPClient
 from pathlib import Path
 
-sessionOutDir = "L:\\stt"
-#sessionOutDir = "C:\\Users\\Festival2026\\Desktop\\stt\\recordings"
+#sessionOutDir = "L:\\stt"
+sessionOutDir = "C:\\Users\\Festival2026\\Desktop\\stt\\recordings"
 
 oscPortIn = 6668
 
@@ -29,6 +29,8 @@ def getSessionNumber(path: str | Path) -> int:
                 match = pathPattern.match(file.name)
                 if match:
                     nums.append(int(match.group(1)))
+    else:
+        print( f"WARNING: path {path} does not exist" )
 
     return max(nums) + 1 if nums else 0
 
@@ -62,8 +64,78 @@ class ButtonInterfaceApp(tk.Tk):
         # btns = tk.Frame(main)
         # btns.pack(fill="x", expand=True)
 
-        self.statusLabels = [None] * numUsers
-        self.pressureDebug = [None] * numUsers
+        self.statusLabels = [None] * (numUsers + 1)
+        self.pressureDebug = [None] * (numUsers + 1)
+
+
+        btns = tk.LabelFrame(
+                        main,
+                        text=f"ALL USERS",
+                        padx=10,
+                        pady=15)
+        btns.pack(fill="x", expand=True, pady=5)
+
+        for i in range(4):
+            btns.grid_columnconfigure(i, weight=1, uniform="group1")
+        
+        tk.Button(
+            btns, 
+            text="PINCH", 
+            width=10,
+            bg="#0B8610",
+            fg="#ffffff",
+            activebackground="#026607",
+            font=("Arial", 18),
+            command=lambda: self.sendAll("pinch"),
+            ).grid(row=0, column=0, padx=5, pady=(0,5), sticky="ew")#.pack(side="left", padx=(0, 8))
+        tk.Button(
+            btns, 
+            text="TRIPOD", 
+            width=10,
+            bg="#005da8",
+            fg="#ffffff",
+            activebackground="#004077",
+            font=("Arial", 18),
+            command=lambda: self.sendAll("tripod"),
+            ).grid(row=0, column=1, padx=5, pady=(0,5), sticky="ew")#.pack(side="left", padx=(0, 8))
+        tk.Button(
+            btns, 
+            text="POWER", 
+            width=10,
+            bg="#650077",
+            fg="#ffffff",
+            activebackground="#570066",
+            font=("Arial", 18),
+            command=lambda: self.sendAll("power"),
+            ).grid(row=0, column=2, padx=(5,25), pady=(0,5), sticky="ew")#).pack(side="left", padx=(0, 28))
+
+        tk.Button(
+            btns, 
+            text="RELAX", 
+            width=10,
+            bg="#c46200",
+            fg="#ffffff",
+            activebackground="#aa4d00",
+            font=("Arial", 18),
+            command=lambda: self.sendAll("relax"),
+            ).grid(row=0, column=3, padx=5, pady=(0,5), sticky="ew")#).pack(side="left", padx=(0, 8))
+
+        self.statusLabels[numUsers] = tk.Label(
+            btns, 
+            text="Status: IDLE", 
+            font=("Arial", 12)
+            )
+        self.statusLabels[numUsers].grid(row=1, column=0, columnspan=4, padx=5, sticky="ew")#.pack(pady=(10, 20))
+
+        self.pressureDebug[numUsers] = tk.Label(
+            btns, 
+            width = 5,
+            text="", 
+            font=("Arial", 10)
+            )
+        self.pressureDebug[numUsers].grid(row=0, column=4, rowspan=2, padx=25, sticky="ew")#.pack(pady=(10, 20))
+
+
 
         for j in range(numUsers):
             btns = tk.LabelFrame(
@@ -102,7 +174,7 @@ class ButtonInterfaceApp(tk.Tk):
                 width=10,
                 bg="#9c27b0",
                 fg="#ffffff",
-                activebackground="#43a047",
+                activebackground="#820c97",
                 font=("Arial", 18),
                 command=lambda id=j: self.send("power",id),
                 ).grid(row=0, column=2, padx=(5,25), pady=(0,5), sticky="ew")#).pack(side="left", padx=(0, 28))
@@ -256,6 +328,31 @@ class ButtonInterfaceApp(tk.Tk):
 
         self.updateRecordButton()
 
+    def sendAll(self, command):
+        print(f"[sending] command: '{command}' for all users")
+
+        value = 1
+
+        try:
+            for id in range(numUsers):
+                msg = f"/{command}/{id}"
+                # send_message(OSC_Address, Value)
+                self.oscClientSqid.send_message(msg, value)
+                print(f"OSC Sent to {oscPortSqid}: {msg} -> {value}")
+
+                msg = "/investigator" + msg
+                self.oscClientCapture.send_message(msg, 1)
+                print(f"OSC Sent to {oscPortCapture}: {msg} -> {value}")
+            
+            # Update GUI status
+            self.statusLabels[numUsers].config(text=f"Sent: {command} -> {value}")
+
+        except Exception as e:
+            self.oscStatusLabel.config(
+                text=f"Error sending message!"
+                )
+            print(f"Failed to send OSC: {e}")
+
     def send(self, command, id):
         print(f"[sending] command: '{command}' for user {id}")
 
@@ -265,16 +362,15 @@ class ButtonInterfaceApp(tk.Tk):
             msg = f"/{command}/{id}"
             # send_message(OSC_Address, Value)
             self.oscClientSqid.send_message(msg, value)
-            
-            # Update GUI status
-            #self.statusLabel.config(text=f"Sent: {msg} -> {value}")
-            self.statusLabels[id].config(text=f"Sent: {command} -> {value}")
             print(f"OSC Sent to {oscPortSqid}: {msg} -> {value}")
-
+            
             msg = "/investigator" + msg
             self.oscClientCapture.send_message(msg, 1)
             print(f"OSC Sent to {oscPortCapture}: {msg} -> {value}")
             
+            # Update GUI status
+            self.statusLabels[id].config(text=f"Sent: {command} -> {value}")
+
         except Exception as e:
             self.oscStatusLabel.config(
                 text=f"Error sending message!"
