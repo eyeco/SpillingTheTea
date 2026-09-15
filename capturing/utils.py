@@ -13,9 +13,7 @@ YELLOW = "\033[33m"
 BLUE = "\033[34m"
 RESET = "\033[0m"
 
-outdir = "L:\\stt"
-#outdir = "C:\\Users\\Festival2026\\Desktop\\stt\\recordings"
-#snapshotDir = f'{outdir}\\snapshots'
+outdir = "C:\\stt\\recordings"
 
 def error(str):
     print(f"{RED}ERROR: {str}{RESET}")
@@ -36,7 +34,7 @@ def extract(str,start,stop):
 
 def checkOrCreate(path):
     if os.path.exists(path) == False:
-        print(f"trying to cerate output directory {path}")
+        print(f"trying to create output directory {path}")
         os.makedirs(path)
         if os.path.exists(path) == True:
             return True
@@ -99,7 +97,7 @@ class EventLogger(Logger):
                 self.writer.writerow([ts,dt,desc,msg])
                 self.file.flush()
             else:
-                error("no CSV file opened, not writing event")
+                warn("no CSV file opened, not writing event")
 
 class MyoLogger(Logger):
     def __init__(self):
@@ -140,7 +138,7 @@ class UILogger(Logger):
                 self.writer.writerow([tsSys,tsDev,*values])
                 self.file.flush()
             else:
-                error("no CSV file opened, not writing event")
+                warn("no CSV file opened, not writing event")
 
 class BoxLogger(Logger):
     def __init__(self):
@@ -162,7 +160,7 @@ class BoxLogger(Logger):
                 self.writer.writerow([tsSys,tsDev,*values])
                 self.file.flush()
             else:
-                error("no CSV file opened, not writing event")
+                warn("no CSV file opened, not writing event")
 
 global logger 
 logger = EventLogger()

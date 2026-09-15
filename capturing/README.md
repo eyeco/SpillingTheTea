@@ -1,6 +1,6 @@
 # StT Video and Audio Capture Script
 
-Python utility for starting and stopping A/V capturing, using the command line tool (ffmpeg)[https://ffmpeg.org/], remote-controlled using OSC commands. Furthermore, it serves the purpose of logging further live sensor data and events, both of which are also transmitted via OSC.
+Python utility for starting and stopping A/V capturing, using the command line tool [ffmpeg](https://ffmpeg.org/), remote-controlled using OSC commands. Furthermore, it serves the purpose of logging further live sensor data and events, both of which are also transmitted via OSC.
 
 ## Python Environment
 
