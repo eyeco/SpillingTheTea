@@ -74,5 +74,5 @@ ffmpeg version 8.1.1-essentials_build-www.gyan.dev Copyright (c) 2000-2026 the F
 
 ### Python packages
 ```
-pip install pythonosc
+pip install python-osc
 ```
